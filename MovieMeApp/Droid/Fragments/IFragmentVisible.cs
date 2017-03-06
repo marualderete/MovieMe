@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Fragments
 {
 	interface IFragmentVisible
 	{

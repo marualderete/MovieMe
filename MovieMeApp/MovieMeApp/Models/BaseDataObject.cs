@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace MovieMeApp
+using MovieMeApp.Helpers;
+using MovieMeApp.Interfaces;
+
+namespace MovieMeApp.Models
 {
 	public class BaseDataObject : ObservableObject, IBaseDataObject
 	{

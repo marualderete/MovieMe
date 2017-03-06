@@ -1,4 +1,4 @@
-﻿namespace MovieMeApp
+﻿namespace MovieMeApp.Models
 {
 	public class Item : BaseDataObject
 	{

@@ -2,6 +2,7 @@
 <resources>
 	<style name="MasterDetailTheme" parent="MasterDetailTheme.Base">
 	</style>
+
 	<style name="MasterDetailTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="colorPrimary">@color/primary</item>
 		<item name="colorPrimaryDark">@color/primaryDark</item>
@@ -9,6 +10,7 @@
 		<item name="android:windowBackground">@color/window_background</item>
 		<item name="windowActionModeOverlay">true</item>
 	</style>
+	
 	<style name="SplashTheme" parent="SplashTheme.Base">
 		<!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
 		<!-- colorPrimary is used for the default action bar background -->
@@ -22,15 +24,24 @@
 	<style name="SplashTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
 		<item name="android:windowBackground">@drawable/background_splash</item>
 	</style>
-	<style name="button_primary" parent="@android:style/Widget.Button">
-		<item name="colorButtonNormal">@color/primary</item>
-		<item name="android:textColor">@android:color/white</item>
-	</style>
 	<style name="Widget.CardContent" parent="android:Widget">
 		<item name="android:paddingLeft">16dp</item>
 		<item name="android:paddingRight">16dp</item>
 		<item name="android:paddingTop">24dp</item>
 		<item name="android:paddingBottom">24dp</item>
 		<item name="android:orientation">vertical</item>
+	</style>
+
+
+	<!-- MOVIE STYLES -->
+	<style name="text_primary" parent="@android:style/Widget.Button">
+		<item name="android:textColor">@color/primary_text</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textSize">@dimen/primary_text_title</item>
+	</style>
+	
+	<style name="button_primary" parent="@android:style/Widget.Button">
+		<item name="colorButtonNormal">@color/primary</item>
+		<item name="android:textColor">@android:color/white</item>
 	</style>
 </resources>

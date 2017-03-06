@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using MovieMeApp.Helpers;
+using MovieMeApp.Interfaces;
+using MovieMeApp.Models;
+using MovieMeApp.Services;
 
 namespace MovieMeApp
 {
 	public partial class App
 	{
-		public static bool AzureNeedsSetup => AzureMobileAppUrl == "https://CONFIGURE-THIS-URL.azurewebsites.net";
-		public static string AzureMobileAppUrl = "http://localhost:5000";
-
 		public App()
 		{
 		}
 
 		public static void Initialize()
 		{
-			if (AzureNeedsSetup)
-				ServiceLocator.Instance.Register<IDataStore<Item>, MockDataStore>();
-			else
-				ServiceLocator.Instance.Register<IDataStore<Item>, CloudDataStore>();
+			ServiceLocator.Instance.Register<IDataStore<MovieStoreModel>, CloudDataMovieStore>();
+			ServiceLocator.Instance.Register<IAuthenticationStore, CloudAuthenticationStore>();
+			//ServiceLocator.Instance.Register<IDataStore<Item>, CloudDataStore>();
 
 #if __IOS__
 			ServiceLocator.Instance.Register<IMessageDialog, iOS.MessageDialog>();

@@ -6,8 +6,12 @@ using Android.Widget;
 using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
+using MovieMeApp.ViewModels;
+using MovieMeApp.Helpers;
+using MovieMeApp.Services;
+using MovieMeApp.Droid.Activities;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Fragments
 {
 	public class BrowseFragment : Android.Support.V4.App.Fragment, IFragmentVisible
 	{

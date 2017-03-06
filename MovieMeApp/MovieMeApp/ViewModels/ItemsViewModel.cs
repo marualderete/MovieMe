@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using MovieMeApp.Helpers;
+using MovieMeApp.Models;
 
-namespace MovieMeApp
+namespace MovieMeApp.ViewModels
 {
 	public class ItemsViewModel : BaseViewModel
 	{
@@ -20,14 +22,14 @@ namespace MovieMeApp
 			{
 				var _item = item as Item;
 				Items.Add(_item);
-				await DataStore.AddItemAsync(_item);
+				//await DataStore.AddItemAsync(_item);
 			});
 #elif __ANDROID__
 			MessagingCenter.Subscribe<Android.App.Activity, Item>(this, "AddItem", async (obj, item) =>
 			{
 				var _item = item as Item;
 				Items.Add(_item);
-				await DataStore.AddItemAsync(_item);
+				//await DataStore.AddItemAsync(_item);
 			});
 #else
 			MessagingCenter.Subscribe<AddItems, Item>(this, "AddItem", async (obj, item) =>
@@ -49,8 +51,8 @@ namespace MovieMeApp
 			try
 			{
 				Items.Clear();
-				var items = await DataStore.GetItemsAsync(true);
-				Items.ReplaceRange(items);
+				var items = await DataStore.GetItemsAsync(AppConfig.TopRated);
+				//Items.ReplaceRange(items);
 			}
 			catch (Exception ex)
 			{

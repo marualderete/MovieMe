@@ -11,8 +11,10 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
+using MovieMeApp.ViewModels;
+using MovieMeApp.Models;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Activities
 {
 	[Activity(Label = "Details", ParentActivity = typeof(MainActivity))]
 	[MetaData("android.support.PARENT_ACTIVITY", Value = ".MainActivity")]

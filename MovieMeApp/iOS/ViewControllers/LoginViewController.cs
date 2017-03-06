@@ -1,4 +1,6 @@
 ﻿using System;
+using MovieMeApp.Helpers;
+using MovieMeApp.ViewModels;
 using UIKit;
 
 namespace MovieMeApp.iOS

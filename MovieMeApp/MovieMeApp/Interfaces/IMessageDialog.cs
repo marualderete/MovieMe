@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MovieMeApp
+namespace MovieMeApp.Interfaces
 {
 	public interface IMessageDialog
 	{

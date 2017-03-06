@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="top_rated">Top Rated</string>
+	<string name="popular">Popular</string>
+	<string name="now_playing">Now Playing</string>
+	<string name="movie_explorer">Movie Explorer</string>
+	<string name="sign_up">Sign Up!</string>
+	
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">MovieMeApp</string>
 	<string name="tab1">Browse</string>

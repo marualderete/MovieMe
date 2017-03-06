@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieMeApp
+namespace MovieMeApp.Interfaces
 {
 	public interface IBaseDataObject
 	{

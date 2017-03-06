@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MovieMeApp
+namespace MovieMeApp.Helpers
 {
 	/// <summary>
 	///     Simple ServiceLocator implementation.

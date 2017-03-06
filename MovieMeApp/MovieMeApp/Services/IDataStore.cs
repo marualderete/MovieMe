@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MovieMeApp
+namespace MovieMeApp.Services
 {
 	public interface IDataStore<T>
 	{
@@ -11,5 +11,6 @@ namespace MovieMeApp
 		Task<bool> DeleteItemAsync(string id);
 		Task<T> GetItemAsync(string id);
 		Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
+		Task<IEnumerable<T>> GetItemsAsync(string filter);
 	}
 }

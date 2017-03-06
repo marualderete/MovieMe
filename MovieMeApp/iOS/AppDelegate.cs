@@ -1,6 +1,7 @@
 ﻿#define AZURE
 
 using Foundation;
+using MovieMeApp.Helpers;
 using UIKit;
 
 namespace MovieMeApp.iOS

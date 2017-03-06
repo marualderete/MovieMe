@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Java.Lang;
 
-namespace MovieMeApp
+namespace MovieMeApp.ViewModels
 {
 	public class LoginViewModel : BaseViewModel
 	{
@@ -17,18 +19,18 @@ namespace MovieMeApp
 			set { message = value; OnPropertyChanged(); }
 		}
 
-		public ICommand NotNowCommand { get; }
-		public ICommand SignInCommand { get; }
+		public ICommand LoginCommand { get; }
+		public ICommand SignUpCommand { get; }
 
-		public async Task SignIn()
+		public async Task SignUp()
 		{
 			try
 			{
 				IsBusy = true;
-				Message = "Signing In...";
+				Message = "Signing Up...";
 
 				// Log the user in
-				await TryLoginAsync();
+				//await TryLoginAsync();
 			}
 			finally
 			{
@@ -38,9 +40,24 @@ namespace MovieMeApp
 			}
 		}
 
-
-		public static async Task<bool> TryLoginAsync()
+		public async Task<bool> TryLoginAsync(string user, string password)
 		{
+			IsBusy = true;
+			try
+			{
+				var userLogged = await AuthenticationStore.ValidateLogin(user, password);
+
+
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+				// MessageDialog.SendMessage("Unable to load items.", "Error");
+			}
+			finally
+			{
+				IsBusy = false;
+			}
 			return true;
 		}
 	}

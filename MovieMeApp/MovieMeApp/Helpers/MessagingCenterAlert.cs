@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MovieMeApp
+namespace MovieMeApp.Helpers
 {
 	class MessagingCenterAlert
 	{

@@ -1,11 +1,16 @@
-﻿namespace MovieMeApp
+﻿using MovieMeApp.Helpers;
+using MovieMeApp.Models;
+using MovieMeApp.Services;
+
+namespace MovieMeApp.ViewModels
 {
 	public class BaseViewModel : ObservableObject
 	{
 		/// <summary>
 		/// Get the azure service instance
 		/// </summary>
-		public IDataStore<Item> DataStore => ServiceLocator.Instance.Get<IDataStore<Item>>();
+		public IDataStore<MovieStoreModel> DataStore => ServiceLocator.Instance.Get<IDataStore<MovieStoreModel>>();
+		public IAuthenticationStore AuthenticationStore => ServiceLocator.Instance.Get<IAuthenticationStore>();
 
 		bool isBusy = false;
 		public bool IsBusy

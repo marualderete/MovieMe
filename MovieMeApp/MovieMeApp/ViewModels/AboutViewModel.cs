@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MovieMeApp
+namespace MovieMeApp.ViewModels
 {
 	public class AboutViewModel : BaseViewModel
 	{

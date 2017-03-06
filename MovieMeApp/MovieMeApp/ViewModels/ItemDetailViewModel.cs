@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieMeApp.Models;
 
-namespace MovieMeApp
+namespace MovieMeApp.ViewModels
 {
 	public class ItemDetailViewModel : BaseViewModel
 	{

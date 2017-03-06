@@ -9,8 +9,9 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Views;
 using Android.Widget;
+using MovieMeApp.Droid.Fragments;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Activities
 {
 	[Activity(Label = "@string/app_name", Icon = "@mipmap/icon",
 		LaunchMode = LaunchMode.SingleInstance,

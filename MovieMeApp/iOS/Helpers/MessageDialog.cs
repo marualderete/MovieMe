@@ -1,4 +1,5 @@
 ﻿using System;
+using MovieMeApp.Interfaces;
 using UIKit;
 
 using static MovieMeApp.iOS.Utils;

@@ -1,4 +1,5 @@
 ﻿using System;
+using MovieMeApp.ViewModels;
 using UIKit;
 
 namespace MovieMeApp.iOS

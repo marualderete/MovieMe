@@ -2,7 +2,7 @@
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Activities
 {
 	public class BaseActivity : AppCompatActivity
 	{

@@ -29,5 +29,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ItemsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MovieStoreModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MovieModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CloudDataMovieStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MovieExplorerViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CloudAuthenticationStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IAuthenticationStore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Utils\" />
   </ItemGroup>
 </Project>

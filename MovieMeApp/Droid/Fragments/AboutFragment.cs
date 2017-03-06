@@ -2,8 +2,9 @@
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using MovieMeApp.ViewModels;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Fragments
 {
 	public class AboutFragment : Android.Support.V4.App.Fragment, IFragmentVisible
 	{

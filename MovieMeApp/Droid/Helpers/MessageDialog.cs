@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MovieMeApp.Interfaces;
 using Plugin.CurrentActivity;
 
 namespace MovieMeApp.Droid

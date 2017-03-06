@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MovieMeApp.Models;
 
-namespace MovieMeApp
+namespace MovieMeApp.Services
 {
 	public class MockDataStore : IDataStore<Item>
 	{
@@ -56,6 +57,11 @@ namespace MovieMeApp
 		public async Task<Item> GetItemAsync(string id)
 		{
 			return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+		}
+
+		public async Task<IEnumerable<Item>> GetItemsAsync(string filter)
+		{
+			return await Task.FromResult(items);
 		}
 
 		public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)

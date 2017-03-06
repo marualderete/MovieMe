@@ -2,8 +2,9 @@
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
+using MovieMeApp.Helpers;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Activities
 {
 	[Activity(Label = "@string/app_name", Theme = "@style/SplashTheme", MainLauncher = true)]
 	public class SplashActivity : AppCompatActivity

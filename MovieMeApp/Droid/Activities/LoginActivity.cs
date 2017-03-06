@@ -6,8 +6,9 @@ using Android.Widget;
 using Android.Content.PM;
 using Android.Support.V4.Content;
 using Android.Graphics;
+using MovieMeApp.ViewModels;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Activities
 {
 	[Activity(Label = "@string/login",
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
@@ -19,27 +20,28 @@ namespace MovieMeApp.Droid
 		/// </summary>
 		protected override int LayoutResource => Resource.Layout.activity_login;
 
-		Button signInButton, notNowButton;
+		Button signUpButton, loginButton;
 		LinearLayout signingInPanel;
 		ProgressBar progressBar;
 		LoginViewModel viewModel;
+		EditText userName, password;
+
+
 		protected override void OnCreate(Bundle savedInstanceState)
+
 		{
 			//Layout gets inflated here
 			base.OnCreate(savedInstanceState);
 
 			viewModel = new LoginViewModel();
 
-			signInButton = FindViewById<Button>(Resource.Id.button_signin);
-			notNowButton = FindViewById<Button>(Resource.Id.button_not_now);
+			signUpButton = FindViewById<Button>(Resource.Id.button_signup);
+			loginButton = FindViewById<Button>(Resource.Id.button_login);
 
-			signInButton.Text = "Sign In";
+			userName = FindViewById<EditText>(Resource.Id.txtUserName);
+			password = FindViewById<EditText>(Resource.Id.txtPassword);
 
-			progressBar = FindViewById<ProgressBar>(Resource.Id.progressbar_signin);
-			signingInPanel = FindViewById<LinearLayout>(Resource.Id.container_signin);
-
-			progressBar.Indeterminate = false;
-			signingInPanel.Visibility = ViewStates.Invisible;
+			signUpButton.Text = "Sign Up";
 
 			//Turn off back arrows
 			SupportActionBar.SetDisplayHomeAsUpEnabled(false);
@@ -51,15 +53,15 @@ namespace MovieMeApp.Droid
 		protected override void OnStart()
 		{
 			base.OnStart();
-			signInButton.Click += SignInButton_Click;
-			notNowButton.Click += NotNowButton_Click;
+			signUpButton.Click += SignUpButton_Click;
+			loginButton.Click += LoginButton_Click;
 		}
 
 		protected override void OnStop()
 		{
 			base.OnStop();
-			signInButton.Click -= SignInButton_Click;
-			notNowButton.Click -= NotNowButton_Click;
+			signUpButton.Click -= SignUpButton_Click;
+			loginButton.Click -= LoginButton_Click;
 		}
 
 		protected override void OnDestroy()
@@ -68,15 +70,22 @@ namespace MovieMeApp.Droid
 			// viewModel.PropertyChanged -= ViewModel_PropertyChanged;
 		}
 
-		private void NotNowButton_Click(object sender, System.EventArgs e)
+		private async void LoginButton_Click(object sender, System.EventArgs e)
 		{
-			var intent = new Intent(this, typeof(MainActivity));
+			var isSessionStarted = await viewModel.TryLoginAsync(userName.Text, password.Text);
+
+			if (!isSessionStarted)
+			{
+				
+			}
+
+			var intent = new Intent(this, typeof(MovieExplorerActivity));
 			intent.AddFlags(ActivityFlags.ClearTop);
 			StartActivity(intent);
 			Finish();
 		}
 
-		private async void SignInButton_Click(object sender, System.EventArgs e)
+		private async void SignUpButton_Click(object sender, System.EventArgs e)
 		{
 			// await viewModel.SignIn();
 		}

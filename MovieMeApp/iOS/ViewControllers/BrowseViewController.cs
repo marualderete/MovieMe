@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 
 using Foundation;
+using MovieMeApp.ViewModels;
 using UIKit;
 
 namespace MovieMeApp.iOS

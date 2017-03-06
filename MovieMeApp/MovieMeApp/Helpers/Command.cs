@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MovieMeApp
+namespace MovieMeApp.Helpers
 {
 	public sealed class Command<T> : Command
 	{

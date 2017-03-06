@@ -7,4 +7,8 @@
 	<dimen name="image_size">120dp</dimen>
 	<dimen name="card_margin">16dp</dimen>
 	<dimen name="fab_margin">16dp</dimen>
+
+
+	<dimen name="primary_text_title">20dp</dimen>
+
 </resources>

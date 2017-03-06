@@ -12,8 +12,11 @@ using Android.Widget;
 using Android.Support.Design.Widget;
 using Plugin.Connectivity;
 using Plugin.CurrentActivity;
+using MovieMeApp.Models;
+using MovieMeApp.ViewModels;
+using MovieMeApp.Helpers;
 
-namespace MovieMeApp.Droid
+namespace MovieMeApp.Droid.Activities
 {
 	[Activity(Label = "AddItemActivity")]
 	public class AddItemActivity : Activity
