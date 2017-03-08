@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,16 +11,13 @@ namespace MovieMeApp.ViewModels
 {
 	public class MovieExplorerViewModel : BaseViewModel
 	{
-		public ObservableRangeCollection<MovieModel> TopRatedModels { get; set; }
-		public ObservableRangeCollection<MovieModel> PopulardModels { get; set; }
+		public ObservableCollection<CategoryModel> Categories { get; set; }
 
 		public Command LoadModelsCommand { get; set; }
 
 		public MovieExplorerViewModel()
 		{
-			TopRatedModels = new ObservableRangeCollection<MovieModel>();
-			PopulardModels = new ObservableRangeCollection<MovieModel>();
-
+			Categories = new ObservableCollection<CategoryModel>();
 			//LoadModelsCommand = new Command(async () => await ExecuteLoadModelsCommand());
 
 		}
@@ -29,20 +28,18 @@ namespace MovieMeApp.ViewModels
 
 			try
 			{
-				TopRatedModels.Clear();
+				//TopRatedModels.Clear();
 
-				var dataStores = await DataStore.GetItemsAsync(category);
+				var dataStores = await DataStore.GetMovieStoreAsync(category);
 				var movies = dataStores.ToList().First().Results.ToList();
 
-				if (category == AppConfig.TopRated)
+				CategoryModel aCategory = new CategoryModel
 				{
-					TopRatedModels.ReplaceRange(movies);
-				}
-				if (category == AppConfig.Popular)
-				{
-					PopulardModels.ReplaceRange(movies);
-				}
+					CategoryName = category,
+					Movies = new ObservableCollection<MovieModel>(movies)
+				};
 
+				Categories.Add(aCategory);
 			}
 			catch (Exception ex)
 			{

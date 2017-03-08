@@ -1861,6 +1861,9 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f08008a
 			public const int item_touch_helper_swipe_escape_velocity = 2131230858;
 			
+			// aapt resource value: 0x7f080095
+			public const int movie_cover_height = 2131230869;
+			
 			// aapt resource value: 0x7f08007d
 			public const int notification_action_icon_size = 2131230845;
 			
@@ -2292,8 +2295,8 @@ namespace MovieMeApp.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b009c
-			public const int action0 = 2131427484;
+			// aapt resource value: 0x7f0b009e
+			public const int action0 = 2131427486;
 			
 			// aapt resource value: 0x7f0b0064
 			public const int action_bar = 2131427428;
@@ -2316,17 +2319,17 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0041
 			public const int action_bar_title = 2131427393;
 			
-			// aapt resource value: 0x7f0b0099
-			public const int action_container = 2131427481;
+			// aapt resource value: 0x7f0b009b
+			public const int action_container = 2131427483;
 			
 			// aapt resource value: 0x7f0b0065
 			public const int action_context_bar = 2131427429;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int action_divider = 2131427488;
+			// aapt resource value: 0x7f0b00a2
+			public const int action_divider = 2131427490;
 			
-			// aapt resource value: 0x7f0b009a
-			public const int action_image = 2131427482;
+			// aapt resource value: 0x7f0b009c
+			public const int action_image = 2131427484;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int action_menu_divider = 2131427333;
@@ -2343,11 +2346,11 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0043
 			public const int action_mode_close_button = 2131427395;
 			
-			// aapt resource value: 0x7f0b009b
-			public const int action_text = 2131427483;
+			// aapt resource value: 0x7f0b009d
+			public const int action_text = 2131427485;
 			
-			// aapt resource value: 0x7f0b00a9
-			public const int actions = 2131427497;
+			// aapt resource value: 0x7f0b00ab
+			public const int actions = 2131427499;
 			
 			// aapt resource value: 0x7f0b0044
 			public const int activity_chooser_view_content = 2131427396;
@@ -2379,8 +2382,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b004b
 			public const int buttonPanel = 2131427403;
 			
-			// aapt resource value: 0x7f0b0095
-			public const int button_learn_more = 2131427477;
+			// aapt resource value: 0x7f0b0092
+			public const int button_learn_more = 2131427474;
 			
 			// aapt resource value: 0x7f0b007d
 			public const int button_login = 2131427453;
@@ -2388,8 +2391,11 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b007e
 			public const int button_signup = 2131427454;
 			
-			// aapt resource value: 0x7f0b009d
-			public const int cancel_action = 2131427485;
+			// aapt resource value: 0x7f0b009f
+			public const int cancel_action = 2131427487;
+			
+			// aapt resource value: 0x7f0b0095
+			public const int category_recycler_view = 2131427477;
 			
 			// aapt resource value: 0x7f0b0016
 			public const int center = 2131427350;
@@ -2403,8 +2409,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b005b
 			public const int checkbox = 2131427419;
 			
-			// aapt resource value: 0x7f0b00a5
-			public const int chronometer = 2131427493;
+			// aapt resource value: 0x7f0b00a7
+			public const int chronometer = 2131427495;
 			
 			// aapt resource value: 0x7f0b0022
 			public const int clip_horizontal = 2131427362;
@@ -2436,20 +2442,20 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b007a
 			public const int description = 2131427450;
 			
-			// aapt resource value: 0x7f0b008b
-			public const int design_bottom_sheet = 2131427467;
-			
-			// aapt resource value: 0x7f0b0092
-			public const int design_menu_item_action_area = 2131427474;
-			
-			// aapt resource value: 0x7f0b0091
-			public const int design_menu_item_action_area_stub = 2131427473;
-			
-			// aapt resource value: 0x7f0b0090
-			public const int design_menu_item_text = 2131427472;
+			// aapt resource value: 0x7f0b0088
+			public const int design_bottom_sheet = 2131427464;
 			
 			// aapt resource value: 0x7f0b008f
-			public const int design_navigation_view = 2131427471;
+			public const int design_menu_item_action_area = 2131427471;
+			
+			// aapt resource value: 0x7f0b008e
+			public const int design_menu_item_action_area_stub = 2131427470;
+			
+			// aapt resource value: 0x7f0b008d
+			public const int design_menu_item_text = 2131427469;
+			
+			// aapt resource value: 0x7f0b008c
+			public const int design_navigation_view = 2131427468;
 			
 			// aapt resource value: 0x7f0b0032
 			public const int disableHome = 2131427378;
@@ -2460,8 +2466,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0019
 			public const int end = 2131427353;
 			
-			// aapt resource value: 0x7f0b00ae
-			public const int end_padder = 2131427502;
+			// aapt resource value: 0x7f0b00b0
+			public const int end_padder = 2131427504;
 			
 			// aapt resource value: 0x7f0b000f
 			public const int enterAlways = 2131427343;
@@ -2490,18 +2496,6 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0029
 			public const int @fixed = 2131427369;
 			
-			// aapt resource value: 0x7f0b0081
-			public const int gallery1_horizontal_scroll = 2131427457;
-			
-			// aapt resource value: 0x7f0b0082
-			public const int gallery1_horizontal_scroll_linear = 2131427458;
-			
-			// aapt resource value: 0x7f0b0083
-			public const int gallery2_horizontal_scroll = 2131427459;
-			
-			// aapt resource value: 0x7f0b0084
-			public const int gallery2_horizontal_scroll_linear = 2131427460;
-			
 			// aapt resource value: 0x7f0b0007
 			public const int home = 2131427335;
 			
@@ -2511,8 +2505,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0049
 			public const int icon = 2131427401;
 			
-			// aapt resource value: 0x7f0b00aa
-			public const int icon_group = 2131427498;
+			// aapt resource value: 0x7f0b00ac
+			public const int icon_group = 2131427500;
 			
 			// aapt resource value: 0x7f0b003e
 			public const int ifRoom = 2131427390;
@@ -2520,26 +2514,23 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0046
 			public const int image = 2131427398;
 			
-			// aapt resource value: 0x7f0b00a6
-			public const int info = 2131427494;
-			
-			// aapt resource value: 0x7f0b0098
-			public const int item_count = 2131427480;
+			// aapt resource value: 0x7f0b00a8
+			public const int info = 2131427496;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int item_touch_helper_previous_elevation = 2131427340;
 			
-			// aapt resource value: 0x7f0b0089
-			public const int largeLabel = 2131427465;
+			// aapt resource value: 0x7f0b0086
+			public const int largeLabel = 2131427462;
 			
 			// aapt resource value: 0x7f0b001b
 			public const int left = 2131427355;
 			
-			// aapt resource value: 0x7f0b00ab
-			public const int line1 = 2131427499;
-			
 			// aapt resource value: 0x7f0b00ad
-			public const int line3 = 2131427501;
+			public const int line1 = 2131427501;
+			
+			// aapt resource value: 0x7f0b00af
+			public const int line3 = 2131427503;
 			
 			// aapt resource value: 0x7f0b0030
 			public const int listMode = 2131427376;
@@ -2550,14 +2541,14 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0073
 			public const int main_content = 2131427443;
 			
-			// aapt resource value: 0x7f0b00b1
-			public const int masked = 2131427505;
+			// aapt resource value: 0x7f0b00b3
+			public const int masked = 2131427507;
 			
-			// aapt resource value: 0x7f0b009f
-			public const int media_actions = 2131427487;
+			// aapt resource value: 0x7f0b00a1
+			public const int media_actions = 2131427489;
 			
-			// aapt resource value: 0x7f0b00b2
-			public const int menu_edit = 2131427506;
+			// aapt resource value: 0x7f0b00b4
+			public const int menu_edit = 2131427508;
 			
 			// aapt resource value: 0x7f0b003b
 			public const int middle = 2131427387;
@@ -2565,11 +2556,29 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0027
 			public const int mini = 2131427367;
 			
+			// aapt resource value: 0x7f0b0093
+			public const int movie_category = 2131427475;
+			
+			// aapt resource value: 0x7f0b0099
+			public const int movie_category_item = 2131427481;
+			
+			// aapt resource value: 0x7f0b009a
+			public const int movie_cover = 2131427482;
+			
+			// aapt resource value: 0x7f0b0081
+			public const int movie_explorer_container = 2131427457;
+			
+			// aapt resource value: 0x7f0b0096
+			public const int movie_frame_container = 2131427478;
+			
+			// aapt resource value: 0x7f0b0094
+			public const int movie_title = 2131427476;
+			
 			// aapt resource value: 0x7f0b002b
 			public const int multiply = 2131427371;
 			
-			// aapt resource value: 0x7f0b008e
-			public const int navigation_header_container = 2131427470;
+			// aapt resource value: 0x7f0b008b
+			public const int navigation_header_container = 2131427467;
 			
 			// aapt resource value: 0x7f0b003f
 			public const int never = 2131427391;
@@ -2580,14 +2589,14 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0028
 			public const int normal = 2131427368;
 			
-			// aapt resource value: 0x7f0b00a8
-			public const int notification_background = 2131427496;
+			// aapt resource value: 0x7f0b00aa
+			public const int notification_background = 2131427498;
 			
-			// aapt resource value: 0x7f0b00a2
-			public const int notification_main_column = 2131427490;
+			// aapt resource value: 0x7f0b00a4
+			public const int notification_main_column = 2131427492;
 			
-			// aapt resource value: 0x7f0b00a1
-			public const int notification_main_column_container = 2131427489;
+			// aapt resource value: 0x7f0b00a3
+			public const int notification_main_column_container = 2131427491;
 			
 			// aapt resource value: 0x7f0b0020
 			public const int parallax = 2131427360;
@@ -2604,26 +2613,26 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0009
 			public const int progress_horizontal = 2131427337;
 			
-			// aapt resource value: 0x7f0b0087
-			public const int progressbar_loading = 2131427463;
+			// aapt resource value: 0x7f0b0084
+			public const int progressbar_loading = 2131427460;
 			
 			// aapt resource value: 0x7f0b005d
 			public const int radio = 2131427421;
 			
-			// aapt resource value: 0x7f0b0097
-			public const int recyclerView = 2131427479;
+			// aapt resource value: 0x7f0b0098
+			public const int recyclerView = 2131427480;
 			
-			// aapt resource value: 0x7f0b0096
-			public const int refresher = 2131427478;
+			// aapt resource value: 0x7f0b0097
+			public const int refresher = 2131427479;
 			
 			// aapt resource value: 0x7f0b001c
 			public const int right = 2131427356;
 			
-			// aapt resource value: 0x7f0b00a7
-			public const int right_icon = 2131427495;
+			// aapt resource value: 0x7f0b00a9
+			public const int right_icon = 2131427497;
 			
-			// aapt resource value: 0x7f0b00a3
-			public const int right_side = 2131427491;
+			// aapt resource value: 0x7f0b00a5
+			public const int right_side = 2131427493;
 			
 			// aapt resource value: 0x7f0b0079
 			public const int save_button = 2131427449;
@@ -2691,17 +2700,17 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0036
 			public const int showTitle = 2131427382;
 			
-			// aapt resource value: 0x7f0b00af
-			public const int sliding_tabs = 2131427503;
+			// aapt resource value: 0x7f0b00b1
+			public const int sliding_tabs = 2131427505;
 			
-			// aapt resource value: 0x7f0b0088
-			public const int smallLabel = 2131427464;
+			// aapt resource value: 0x7f0b0085
+			public const int smallLabel = 2131427461;
 			
-			// aapt resource value: 0x7f0b008d
-			public const int snackbar_action = 2131427469;
+			// aapt resource value: 0x7f0b008a
+			public const int snackbar_action = 2131427466;
 			
-			// aapt resource value: 0x7f0b008c
-			public const int snackbar_text = 2131427468;
+			// aapt resource value: 0x7f0b0089
+			public const int snackbar_text = 2131427465;
 			
 			// aapt resource value: 0x7f0b0013
 			public const int snap = 2131427347;
@@ -2709,8 +2718,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b004c
 			public const int spacer = 2131427404;
 			
-			// aapt resource value: 0x7f0b0086
-			public const int spinner = 2131427462;
+			// aapt resource value: 0x7f0b0083
+			public const int spinner = 2131427459;
 			
 			// aapt resource value: 0x7f0b000a
 			public const int split_action_bar = 2131427338;
@@ -2727,8 +2736,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b001d
 			public const int start = 2131427357;
 			
-			// aapt resource value: 0x7f0b009e
-			public const int status_bar_latest_event_content = 2131427486;
+			// aapt resource value: 0x7f0b00a0
+			public const int status_bar_latest_event_content = 2131427488;
 			
 			// aapt resource value: 0x7f0b005e
 			public const int submenuarrow = 2131427422;
@@ -2742,11 +2751,11 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b007f
 			public const int tabs = 2131427455;
 			
-			// aapt resource value: 0x7f0b0085
-			public const int text = 2131427461;
+			// aapt resource value: 0x7f0b0082
+			public const int text = 2131427458;
 			
-			// aapt resource value: 0x7f0b00ac
-			public const int text2 = 2131427500;
+			// aapt resource value: 0x7f0b00ae
+			public const int text2 = 2131427502;
 			
 			// aapt resource value: 0x7f0b0052
 			public const int textSpacerNoButtons = 2131427410;
@@ -2754,11 +2763,11 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0051
 			public const int textSpacerNoTitle = 2131427409;
 			
-			// aapt resource value: 0x7f0b0094
-			public const int textView1 = 2131427476;
+			// aapt resource value: 0x7f0b0091
+			public const int textView1 = 2131427473;
 			
-			// aapt resource value: 0x7f0b0093
-			public const int text_input_password_toggle = 2131427475;
+			// aapt resource value: 0x7f0b0090
+			public const int text_input_password_toggle = 2131427472;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int textinput_counter = 2131427328;
@@ -2766,8 +2775,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0001
 			public const int textinput_error = 2131427329;
 			
-			// aapt resource value: 0x7f0b00a4
-			public const int time = 2131427492;
+			// aapt resource value: 0x7f0b00a6
+			public const int time = 2131427494;
 			
 			// aapt resource value: 0x7f0b004a
 			public const int title = 2131427402;
@@ -2787,8 +2796,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0056
 			public const int topPanel = 2131427414;
 			
-			// aapt resource value: 0x7f0b008a
-			public const int touch_outside = 2131427466;
+			// aapt resource value: 0x7f0b0087
+			public const int touch_outside = 2131427463;
 			
 			// aapt resource value: 0x7f0b000d
 			public const int transition_current_scene = 2131427341;
@@ -2820,8 +2829,8 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f0b0080
 			public const int viewpager = 2131427456;
 			
-			// aapt resource value: 0x7f0b00b0
-			public const int visible = 2131427504;
+			// aapt resource value: 0x7f0b00b2
+			public const int visible = 2131427506;
 			
 			// aapt resource value: 0x7f0b0040
 			public const int withText = 2131427392;
@@ -3027,16 +3036,16 @@ namespace MovieMeApp.Droid
 			public const int fragment_about = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int fragment_browse = 2130968624;
+			public const int movie_category = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int fragment_myitems = 2130968625;
+			public const int movie_category_list = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int item_browse = 2130968626;
+			public const int movie_detail = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int item_my_item = 2130968627;
+			public const int movie_item = 2130968627;
 			
 			// aapt resource value: 0x7f040034
 			public const int notification_action = 2130968628;

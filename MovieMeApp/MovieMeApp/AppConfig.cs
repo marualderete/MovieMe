@@ -11,8 +11,10 @@ namespace MovieMeApp
 
 		//SEARCH FILTERS
 		public static readonly string DataStoreBaseURL = "https://api.themoviedb.org/3/";
-		public static readonly string DataStoreSearchURL = "https://api.themoviedb.org/3/movie/{0}?api_key={1}{2}{3}";
-		public static readonly string DataStoreMovieImageURL = "https://image.tmdb.org/t/p/{0}/{1}";
+		public static readonly string DataStoreSearchURL = "https://api.themoviedb.org/3/movie/{0}?api_key={1}&{2}";
+		public static readonly string DataStoreMovieImageURL = "https://image.tmdb.org/t/p/{0}{1}";
+
+
 
 		//AUTHENTICATION URLS
 		public static readonly string GetRequestTokenURL = "https://api.themoviedb.org/3/authentication/token/new?api_key={0}";
@@ -27,7 +29,6 @@ namespace MovieMeApp
 		public static readonly string TopRated = "top_rated";
 		public static readonly string Popular = "popular";
 		public static readonly string Similar = "similar";
-		public static readonly string SortByPopularity = "sort_by=popularity.des";
 		public static readonly string AppendToResponse = "&append_to_response=";
 
 

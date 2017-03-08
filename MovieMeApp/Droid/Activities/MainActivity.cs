@@ -80,7 +80,7 @@ namespace MovieMeApp.Droid.Activities
 		{
 			switch (position)
 			{
-				case 0: return BrowseFragment.NewInstance();
+				//case 0: return BrowseFragment.NewInstance();
 				case 1: return AboutFragment.NewInstance();
 			}
 			return null;

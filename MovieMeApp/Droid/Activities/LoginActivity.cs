@@ -47,7 +47,6 @@ namespace MovieMeApp.Droid.Activities
 			SupportActionBar.SetDisplayHomeAsUpEnabled(false);
 			SupportActionBar.SetHomeButtonEnabled(false);
 
-			// viewModel.PropertyChanged += ViewModel_PropertyChanged;
 		}
 
 		protected override void OnStart()
@@ -67,7 +66,6 @@ namespace MovieMeApp.Droid.Activities
 		protected override void OnDestroy()
 		{
 			base.OnDestroy();
-			// viewModel.PropertyChanged -= ViewModel_PropertyChanged;
 		}
 
 		private async void LoginButton_Click(object sender, System.EventArgs e)

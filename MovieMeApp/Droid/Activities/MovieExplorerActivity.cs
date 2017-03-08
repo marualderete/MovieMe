@@ -1,8 +1,10 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
+using MovieMeApp.Droid.Fragments;
 using MovieMeApp.ViewModels;
 
 namespace MovieMeApp.Droid.Activities
@@ -17,8 +19,6 @@ namespace MovieMeApp.Droid.Activities
 		/// </summary>
 		protected override int LayoutResource => Resource.Layout.activity_movie_explorer;
 
-		LinearLayout gallery1_layout, gallery2_layout, gallery3_layout;
-
 		MovieExplorerViewModel viewModel;
 
 		protected override async void OnCreate(Bundle savedInstanceState)
@@ -30,14 +30,17 @@ namespace MovieMeApp.Droid.Activities
 			await viewModel.LoadModels(AppConfig.TopRated);
 			await viewModel.LoadModels(AppConfig.Popular);
 
-			gallery1_layout = FindViewById<LinearLayout>(Resource.Id.gallery1_horizontal_scroll_linear);
-			gallery2_layout = FindViewById<LinearLayout>(Resource.Id.gallery2_horizontal_scroll_linear);
-			//gallery3_layout = FindViewById<LinearLayout>(Resource.Id.gallery3_horizontal_scroll_linear);
+			// Create a new fragment and a transaction.
+			FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
+			MovieCategoryFragment aCategoryFragment = new MovieCategoryFragment();
+			aCategoryFragment.ViewModel = viewModel;
 
-			//foreach (MovieModel movie in viewModel.TopRatedModels)
-			//{ 
-			//	ImageView image = new ImageView(
-			//}
+			// The fragment will have the ID of Resource.Id.fragment_container.
+			fragmentTx.Add(Resource.Id.movie_explorer_container, aCategoryFragment);
+
+			// Commit the transaction.
+			fragmentTx.Commit();
+
 			//Turn off back arrows
 			SupportActionBar.SetDisplayHomeAsUpEnabled(false);
 			SupportActionBar.SetHomeButtonEnabled(false);

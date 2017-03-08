@@ -5,6 +5,10 @@ namespace MovieMeApp.Services
 {
 	public interface IAuthenticationStore
 	{
-		Task<bool> ValidateLogin(string user, string password);
+		Task<bool> NewLogin(string user, string password);
+
+		Task<bool> CreateNewSession();
+
+		Task<bool> IsValidSession();
 	}
 }

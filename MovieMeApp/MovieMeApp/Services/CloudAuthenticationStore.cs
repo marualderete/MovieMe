@@ -19,6 +19,26 @@ namespace MovieMeApp.Services
 			requestToken = string.Empty;
 		}
 
+		public string RequestToken 
+		{ 
+			get 
+			{ 
+				return requestToken; 
+			} 
+		}
+		public string SessionID
+		{
+			get
+			{
+				return sessionID;
+			}
+		}
+
+		private void Dispose()
+		{
+			client.Dispose();
+		}
+
 		async Task<string> GetRequestToken()
 		{
 			//TODO: change appconfig string url's
@@ -37,7 +57,7 @@ namespace MovieMeApp.Services
 			return JObject.Parse(result.ToString())["request_token"].ToString();
 		}
 
-		public async Task<bool> ValidateLogin(string username, string password)
+		public async Task<bool> NewLogin(string username, string password)
 		{
 			requestToken = await GetRequestToken();
 
@@ -53,13 +73,26 @@ namespace MovieMeApp.Services
 			{
 				return false;
 			}
-			//if validation is ok, then create a session:  
-			var sessionURL = string.Format(AppConfig.GetSessionURL, AppConfig.DataStoreApiKey, requestToken);
 			client.CancelPendingRequests();
+
+			//if validation is ok, then create a session:  
+			await CreateNewSession();
+
+			return true;
+		}
+
+		public async Task<bool> CreateNewSession()
+		{
+			if (string.IsNullOrEmpty(requestToken))
+			{
+				return false;
+			}
+
+			var sessionURL = string.Format(AppConfig.GetSessionURL, AppConfig.DataStoreApiKey, requestToken);
 			var sessionResult = await client.GetStringAsync(sessionURL);
 			var session = await Task.Run(() => JsonConvert.DeserializeObject(sessionResult));
 
-			var isSessionStarted = (bool) JObject.Parse(session.ToString())["success"];
+			var isSessionStarted = (bool)JObject.Parse(session.ToString())["success"];
 
 			if (!isSessionStarted)
 			{
@@ -67,9 +100,13 @@ namespace MovieMeApp.Services
 			}
 
 			sessionID = JObject.Parse(session.ToString())["session_id"].ToString();
-
-			client.Dispose();
 			return true;
+		}
+
+		//llamar al valid_with_login
+		public Task<bool> IsValidSession()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

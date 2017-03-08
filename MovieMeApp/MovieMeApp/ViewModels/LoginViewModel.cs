@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Java.Lang;
 
 namespace MovieMeApp.ViewModels
 {
@@ -45,7 +45,7 @@ namespace MovieMeApp.ViewModels
 			IsBusy = true;
 			try
 			{
-				var userLogged = await AuthenticationStore.ValidateLogin(user, password);
+				var userLogged = await AuthenticationStore.NewLogin(user, password);
 
 
 			}

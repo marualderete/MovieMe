@@ -20,7 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IMessageDialog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BaseDataObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Item.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\CloudDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\MockDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
@@ -36,6 +35,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MovieExplorerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CloudAuthenticationStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAuthenticationStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using MovieMeApp.Helpers;
@@ -51,7 +51,7 @@ namespace MovieMeApp.ViewModels
 			try
 			{
 				Items.Clear();
-				var items = await DataStore.GetItemsAsync(AppConfig.TopRated);
+				var items = await DataStore.GetMovieStoreAsync(AppConfig.TopRated);
 				//Items.ReplaceRange(items);
 			}
 			catch (Exception ex)
