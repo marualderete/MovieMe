@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAuthenticationStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Utils\" />

@@ -6,6 +6,11 @@
 	<string name="movie_explorer">Movie Explorer</string>
 	<string name="sign_up">Sign Up!</string>
 	
+	<string name="top_rated">Top Rated</string>
+	<string name="similar">Similar</string>
+	<string name="now_playing">Now Playing</string>
+	<string name="similar_videos">Similar Videos</string>
+	
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">MovieMeApp</string>
 	<string name="tab1">Browse</string>
@@ -25,4 +30,5 @@
 	<string name="hint_description">Description</string>
 	<string name="app_description">This app is written in C# and native APIs using the Xamarin Platform. It shares code with its iOS, Android, &amp; Windows versions.</string>
 	<string name="sign_in_text">Sign in with your account to save and sync items</string>
+	
 </resources>

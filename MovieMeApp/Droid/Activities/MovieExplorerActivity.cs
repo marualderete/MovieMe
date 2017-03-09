@@ -2,7 +2,8 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-
+using Android.Views;
+using Android.Widget;
 using MovieMeApp.Droid.Fragments;
 using MovieMeApp.ViewModels;
 
@@ -32,11 +33,13 @@ namespace MovieMeApp.Droid.Activities
 		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			//Layout gets inflated here
-			base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);
 
 			viewModel = new MovieExplorerViewModel();
+
 			await viewModel.LoadModels(AppConfig.TopRated);
 			await viewModel.LoadModels(AppConfig.Popular);
+            await viewModel.LoadModels (AppConfig.Similar);
 
 			// Create a new fragment and a transaction.
 			FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();

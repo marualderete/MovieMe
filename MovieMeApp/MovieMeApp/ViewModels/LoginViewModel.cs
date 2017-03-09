@@ -40,8 +40,7 @@ namespace MovieMeApp.ViewModels
 			IsBusy = true;
 			try
 			{
-				var userLogged = await AuthenticationStore.NewLogin(user, password);
-
+				await AuthenticationStore.NewLogin(user, password);
 
 			}
 			catch (Exception ex)

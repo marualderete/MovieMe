@@ -8,8 +8,10 @@ using Android.Widget;
 using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
+
 using MovieMeApp.ViewModels;
 using MovieMeApp.Services;
+using MovieMeApp.Utils;
 using MovieMeApp.Droid.Activities;
 
 using Uri = Android.Net.Uri;
@@ -23,10 +25,10 @@ namespace MovieMeApp.Droid.Fragments
 	public class MovieCategoryFragment : Android.App.Fragment, IFragmentVisible
 	{
 		#region private properties
+
 		MovieCategoryAdapter adapter;
 		SwipeRefreshLayout refresher;
 		ProgressBar progress;
-
 
 		#endregion
 
@@ -49,20 +51,21 @@ namespace MovieMeApp.Droid.Fragments
 		#region override methods for MovieCategoryFragment
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
+            View view = inflater.Inflate (Resource.Layout.movie_category_list, container, false);
 
-			View view = inflater.Inflate(Resource.Layout.movie_category_list, container, false);
+            refresher = view.FindViewById<SwipeRefreshLayout> (Resource.Id.refresher);
+            refresher.SetColorSchemeColors (Resource.Color.accent);
+            refresher.Refreshing = true;
+
+            progress = view.FindViewById<ProgressBar> (Resource.Id.progressbar_frame_container);
+            progress.Visibility = ViewStates.Visible;
+
 			var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
-
 			recyclerView.HasFixedSize = true;
 			recyclerView.SetAdapter(adapter = new MovieCategoryAdapter(Activity, ViewModel));
 
-			refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
-
-			refresher.SetColorSchemeColors(Resource.Color.accent);
-
-			progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_loading);
-			progress.Visibility = ViewStates.Gone;
-
+            progress.Visibility = ViewStates.Gone;
+            refresher.Refreshing = false;
 			return view;
 		}
 
@@ -99,10 +102,14 @@ namespace MovieMeApp.Droid.Fragments
 
 		async void Refresher_Refresh(object sender, EventArgs e)
 		{
+            refresher.Refreshing = true;
+
 			ViewModel.Categories.Clear();
 			await ViewModel.LoadModels(AppConfig.TopRated);
 			await ViewModel.LoadModels(AppConfig.Popular);
-			progress.Visibility = ViewStates.Gone;
+            await ViewModel.LoadModels (AppConfig.Similar);
+
+            refresher.Refreshing = false;
 		}
 
 		#endregion
@@ -122,7 +129,7 @@ namespace MovieMeApp.Droid.Fragments
 		#endregion
 
 		#region constructor
-		public MovieAdapter(ObservableCollection<MovieModel> movies, CloudDataMovieStore movieStore)
+        public MovieAdapter(ObservableCollection<MovieModel> movies, CloudDataMovieStore movieStore)
 		{
 			_movies = movies;
 			_dataMovieStore = movieStore;
@@ -139,7 +146,7 @@ namespace MovieMeApp.Droid.Fragments
 
 			var id = Resource.Layout.movie_item;
 			itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
-			var vh = new MovieViewHolder(itemView, OnClick, OnLongClick);
+			var vh = new MovieViewHolder(itemView, Image_ItemClick, OnLongClick);
 			return vh;
 		}
 
@@ -149,12 +156,31 @@ namespace MovieMeApp.Droid.Fragments
 			var movie = _movies[position];
 
 			var url = await _dataMovieStore.GetMovieCoverURL(movie.Id);
-			Uri uri = Uri.Parse(url);
-			Picasso.With(_context).Load(uri).Into(movieHolder.MovieCover);
+
+            try 
+            { 
+                Uri uri = Uri.Parse (url);
+                Picasso.With (_context).Load (uri).Fit ().Into (movieHolder.MovieCover);
+
+            } catch (Exception ex) 
+            {
+                Console.WriteLine ("Error getting the movie cover image: ", ex.Message);
+
+            }
 
 		}
 
 		public override int ItemCount => _movies.Count;
+
+        void Image_ItemClick (RecyclerClickEventArgs e)
+        {
+            var item = _movies [e.Position];
+
+            var intent = new Intent (_context.ApplicationContext, typeof (BrowseItemDetailActivity));
+
+            //intent.PutExtra ("data", Newtonsoft.Json.JsonConvert.SerializeObject (item));
+            //Activity.StartActivity (intent);
+        }
 		#endregion
 	}
 
@@ -164,15 +190,24 @@ namespace MovieMeApp.Droid.Fragments
 	class MovieCategoryAdapter : BaseRecycleViewAdapter
 	{
 		#region private properties
+
 		MovieExplorerViewModel _viewModel;
+        StringUtils _utils;
 		Activity _activity;
 		Context _context;
+
 		#endregion
 
 		#region constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MovieMeApp.Droid.Fragments.MovieCategoryAdapter"/> class.
+        /// </summary>
+        /// <param name="activity">Activity.</param>
+        /// <param name="viewModel">View model.</param>
 		public MovieCategoryAdapter(Activity activity, MovieExplorerViewModel viewModel)
 		{
 			_viewModel = viewModel;
+            _utils = new StringUtils ();
 			_activity = activity;
 
 			_viewModel.Categories.CollectionChanged += (sender, args) =>
@@ -204,16 +239,19 @@ namespace MovieMeApp.Droid.Fragments
 			// Replace the contents of the view with that element
 			var movieCategoryHolder = holder as MovieCategoryViewHolder;
 
-			//mAdapter.notifyItemInserted(mItems.size() - 1);
-			movieCategoryHolder.CategoryTitle.Text = item.CategoryName;
+            movieCategoryHolder.CategoryTitle.Text = _utils.GetCategoryName (item.CategoryName);
 
 			movieCategoryHolder.CategoryRecyclerView.HasFixedSize = true;
-			movieCategoryHolder.CategoryRecyclerView.SetAdapter(new MovieAdapter(item.Movies, (MovieMeApp.Services.CloudDataMovieStore)_viewModel.DataStore));
+
+            var movieAdapter = new MovieAdapter (item.Movies, (CloudDataMovieStore)_viewModel.DataStore);
+            movieCategoryHolder.CategoryRecyclerView.SetAdapter(movieAdapter);
 
 		}
 
 		public override int ItemCount => _viewModel.Categories.Count;
-		#endregion
+
+        #endregion
+
 	}
 
 	#endregion
@@ -257,8 +295,6 @@ namespace MovieMeApp.Droid.Fragments
 			CategoryTitle = itemView.FindViewById<TextView>(Resource.Id.movie_title);
 			CategoryRecyclerView = itemView.FindViewById<RecyclerView>(Resource.Id.category_recycler_view);
 
-			//this could be a shorcut to put this movie in to Favorites :)
-			//itemView.LongClick += (sender, e) => longClickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
 		}
 		#endregion
 	}

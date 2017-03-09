@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"
             android:gravity="center_horizontal"
             android:id="@+id/txtUserName" />
         <EditText
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:textColor="@android:color/white"
             android:gravity="center_horizontal"
             android:password="true"
             android:id="@+id/txtPassword" />
@@ -52,5 +54,11 @@
                 android:theme="@style/button_primary"
                 android:id="@+id/button_signup" />
         </LinearLayout>
+        <ProgressBar
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progressbar_login_loading"
+            android:indeterminate="true" />
     </LinearLayout>
 </RelativeLayout>

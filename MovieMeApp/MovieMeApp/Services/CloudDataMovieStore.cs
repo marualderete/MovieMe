@@ -16,9 +16,11 @@ namespace MovieMeApp.Services
 	public class CloudDataMovieStore : IDataStore<MovieStoreModel>
 	{
 		#region private properties
+
 		HttpClient client;
 		List<MovieStoreModel> models;
 		CloudAuthenticationStore authenticationStore;
+
 		#endregion
 
 		#region constructor
@@ -41,13 +43,21 @@ namespace MovieMeApp.Services
 		public async Task<IEnumerable<MovieStoreModel>> GetMovieStoreAsync(string filter)
 		{
 			var url = string.Format(AppConfig.DataStoreSearchURL, filter, AppConfig.DataStoreApiKey, SortType.Desc);
-			var json = await client.GetStringAsync(url);
-			var storeModel = await Task.Run(() => JsonConvert.DeserializeObject<MovieStoreModel>(json));
 
-			models.Add(storeModel);
+            try {
+                var json = await client.GetStringAsync (url);
+                var storeModel = await Task.Run (() => JsonConvert.DeserializeObject<MovieStoreModel> (json));
 
-			//TODO: check if success to cancel pending request!
-			client.CancelPendingRequests();
+                models.Add (storeModel);
+
+            } catch (Exception ex) {
+                Console.WriteLine ("Was an error trying to get movies from API: ", ex.Message);
+            } finally 
+            {
+                //TODO: check if success to cancel pending request!
+                client.CancelPendingRequests ();
+            }
+			
 			return models;
 		}
 
@@ -59,12 +69,21 @@ namespace MovieMeApp.Services
 		public async Task<MovieStoreModel> GetMovieAsync(string id)
 		{
 			var url = string.Format(AppConfig.DataStoreSearchURL, id, AppConfig.DataStoreApiKey, SortType.Desc);
-			var json = await client.GetStringAsync(url);
 
-			var movie = await Task.Run(() => JsonConvert.DeserializeObject<MovieModel>(json));
+            try
+            {
+                var json = await client.GetStringAsync (url);
+                var movie = await Task.Run (() => JsonConvert.DeserializeObject<MovieModel> (json));
 
+                return new MovieStoreModel { Results = new MovieModel [] { movie } };
 
-			return new MovieStoreModel { Results = new MovieModel[] { movie } };
+            } catch (Exception ex) 
+            {
+                Console.WriteLine ("Was an error trying to get selected movie from API: ", ex.Message);
+
+                return new MovieStoreModel();
+            }
+			
 		}
 
 		/// <summary>
@@ -76,8 +95,15 @@ namespace MovieMeApp.Services
 		public async Task<string> GetMovieCoverURL(string id)
 		{
 			var dataStore = await GetMovieAsync(id);
-			var image = string.Format(AppConfig.DataStoreMovieImageURL, "w500", dataStore.Results.First().BackdropPath);
+            var currentMovie = dataStore.Results.Any() ? dataStore.Results.First() : null;
 
+            if (currentMovie == null) 
+            {
+                Console.WriteLine ("There is no movie for your id");
+                return string.Empty;
+            }
+
+            var image = string.Format(AppConfig.DataStoreMovieImageURL, "w500", currentMovie.BackdropPath);
 			return image;
 		}
 
