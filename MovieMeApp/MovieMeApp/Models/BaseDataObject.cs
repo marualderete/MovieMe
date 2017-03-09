@@ -6,12 +6,17 @@ using MovieMeApp.Interfaces;
 
 namespace MovieMeApp.Models
 {
+	/// <summary>
+	/// Base data object.
+	/// </summary>
 	public class BaseDataObject : ObservableObject, IBaseDataObject
 	{
+		#region constructor
 		public BaseDataObject()
 		{
 			Id = Guid.NewGuid().ToString();
 		}
+		#endregion
 
 		/// <summary>
 		/// Id for item

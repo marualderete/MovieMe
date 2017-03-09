@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Newtonsoft.Json;
 
 namespace MovieMeApp.Models
 {
+	/// <summary>
+	/// Movie store model.
+	/// </summary>
 	public class MovieStoreModel : BaseDataObject
 	{
-		public MovieStoreModel() : base()
-		{ 
-		}
 
 		/// <summary>
 		/// The page.

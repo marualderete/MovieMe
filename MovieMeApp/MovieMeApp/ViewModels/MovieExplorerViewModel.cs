@@ -1,35 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+
 using MovieMeApp.Helpers;
-using MovieMeApp.Models;
 
 namespace MovieMeApp.ViewModels
 {
+	/// <summary>
+	/// Movie explorer view model.
+	/// </summary>
 	public class MovieExplorerViewModel : BaseViewModel
 	{
-		public ObservableCollection<CategoryModel> Categories { get; set; }
+		#region public properties
 
+		public ObservableCollection<CategoryModel> Categories { get; set; }
 		public Command LoadModelsCommand { get; set; }
 
+		#endregion
+
+		#region constructor
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:MovieMeApp.ViewModels.MovieExplorerViewModel"/> class.
+		/// </summary>
 		public MovieExplorerViewModel()
 		{
 			Categories = new ObservableCollection<CategoryModel>();
-			//LoadModelsCommand = new Command(async () => await ExecuteLoadModelsCommand());
 
 		}
+		#endregion
 
+		#region public methods
+
+		/// <summary>
+		/// Loads the models.
+		/// </summary>
+		/// <returns>The models.</returns>
+		/// <param name="category">Category.</param>
 		public async Task LoadModels(string category)
 		{
 			IsBusy = true;
 
 			try
 			{
-				//TopRatedModels.Clear();
-
 				var dataStores = await DataStore.GetMovieStoreAsync(category);
 				var movies = dataStores.ToList().First().Results.ToList();
 
@@ -40,16 +54,19 @@ namespace MovieMeApp.ViewModels
 				};
 
 				Categories.Add(aCategory);
+
 			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				// MessageDialog.SendMessage("Unable to load items.", "Error");
 			}
 			finally
 			{
 				IsBusy = false;
 			}
 		}
+
+
+		#endregion
 	}
 }

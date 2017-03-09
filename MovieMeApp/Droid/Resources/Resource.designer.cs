@@ -1864,6 +1864,9 @@ namespace MovieMeApp.Droid
 			// aapt resource value: 0x7f080095
 			public const int movie_cover_height = 2131230869;
 			
+			// aapt resource value: 0x7f080096
+			public const int movie_cover_width = 2131230870;
+			
 			// aapt resource value: 0x7f08007d
 			public const int notification_action_icon_size = 2131230845;
 			
@@ -4526,6 +4529,9 @@ namespace MovieMeApp.Droid
 			
 			// aapt resource value: 0x7f070184
 			public const int button_primary = 2131165572;
+			
+			// aapt resource value: 0x7f070185
+			public const int category_title = 2131165573;
 			
 			// aapt resource value: 0x7f070183
 			public const int text_primary = 2131165571;

@@ -7,11 +7,6 @@ namespace MovieMeApp.ViewModels
 {
 	public class LoginViewModel : BaseViewModel
 	{
-		public LoginViewModel()
-		{
-
-		}
-
 		string message = string.Empty;
 		public string Message
 		{
@@ -52,7 +47,6 @@ namespace MovieMeApp.ViewModels
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex);
-				// MessageDialog.SendMessage("Unable to load items.", "Error");
 			}
 			finally
 			{

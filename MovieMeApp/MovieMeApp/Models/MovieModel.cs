@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace MovieMeApp
 {
+	/// <summary>
+	/// Movie model.
+	/// </summary>
 	public class MovieModel : ObservableObject, IBaseDataObject
 	{
 		/// <summary>

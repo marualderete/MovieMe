@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -7,44 +9,46 @@ using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
 using MovieMeApp.ViewModels;
-using MovieMeApp.Helpers;
 using MovieMeApp.Services;
 using MovieMeApp.Droid.Activities;
 
 using Uri = Android.Net.Uri;
-using System.Linq;
 using Square.Picasso;
-using System.Collections.ObjectModel;
 
 namespace MovieMeApp.Droid.Fragments
 {
+	/// <summary>
+	/// Movie category fragment.
+	/// </summary>
 	public class MovieCategoryFragment : Android.App.Fragment, IFragmentVisible
 	{
+		#region private properties
+		MovieCategoryAdapter adapter;
+		SwipeRefreshLayout refresher;
+		ProgressBar progress;
+
+
+		#endregion
+
+		#region public properties
 		public static MovieCategoryFragment NewInstance() =>
 			new MovieCategoryFragment { Arguments = new Bundle() };
 
-		MovieCategoryAdapter adapter;
-		SwipeRefreshLayout refresher;
-
-		ProgressBar progress;
 		public MovieExplorerViewModel ViewModel
 		{
 			get;
 			set;
 		}
 
-		public override void OnCreate(Bundle savedInstanceState)
+		public void BecameVisible()
 		{
-			base.OnCreate(savedInstanceState);
-
-			// Create your fragment here
 		}
 
+		#endregion
+
+		#region override methods for MovieCategoryFragment
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			//ViewModel = new MovieExplorerViewModel();
-
-			//ServiceLocator.Instance.Register<MockDataStore, MockDataStore>();
 
 			View view = inflater.Inflate(Resource.Layout.movie_category_list, container, false);
 			var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
@@ -67,22 +71,20 @@ namespace MovieMeApp.Droid.Fragments
 			base.OnStart();
 
 			refresher.Refresh += Refresher_Refresh;
-			//ViewModel.PropertyChanged += ViewModel_PropertyChanged;
 			adapter.ItemClick += Adapter_ItemClick;
-
-			//if (ViewModel.Items.Count == 0)
-			//	ViewModel.LoadItemsCommand.Execute(null);
 		}
 
 		public override void OnStop()
 		{
 			base.OnStop();
 			refresher.Refresh -= Refresher_Refresh;
-			//ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
 			adapter.ItemClick -= Adapter_ItemClick;
 		}
 
-		private void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
+		#endregion
+
+		#region private methods
+		void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
 		{
 			var item = ViewModel.Categories[e.Position];
 			var intent = new Intent(Activity, typeof(BrowseItemDetailActivity));
@@ -91,33 +93,43 @@ namespace MovieMeApp.Droid.Fragments
 			Activity.StartActivity(intent);
 		}
 
-		private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 		}
 
-		private async void Refresher_Refresh(object sender, EventArgs e)
+		async void Refresher_Refresh(object sender, EventArgs e)
 		{
+			ViewModel.Categories.Clear();
 			await ViewModel.LoadModels(AppConfig.TopRated);
-			//await ViewModel.LoadModels(AppConfig.Popular);
+			await ViewModel.LoadModels(AppConfig.Popular);
+			progress.Visibility = ViewStates.Gone;
 		}
 
-		public void BecameVisible()
-		{
-		}
+		#endregion
 	}
 
+	#region ADAPTERS
+	/// <summary>
+	/// Movie adapter.
+	/// </summary>
 	class MovieAdapter : BaseRecycleViewAdapter
-	{ 
+	{
+		#region private properties
 		Context _context;
 		ObservableCollection<MovieModel> _movies;
 		CloudDataMovieStore _dataMovieStore;
 
+		#endregion
+
+		#region constructor
 		public MovieAdapter(ObservableCollection<MovieModel> movies, CloudDataMovieStore movieStore)
 		{
 			_movies = movies;
 			_dataMovieStore = movieStore;
 		}
+		#endregion
 
+		#region override methods for MovieAdapter
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 		{
 			//Setup your layout here
@@ -143,27 +155,34 @@ namespace MovieMeApp.Droid.Fragments
 		}
 
 		public override int ItemCount => _movies.Count;
+		#endregion
 	}
 
+	/// <summary>
+	/// Movie category adapter.
+	/// </summary>
 	class MovieCategoryAdapter : BaseRecycleViewAdapter
 	{
+		#region private properties
 		MovieExplorerViewModel _viewModel;
 		Activity _activity;
-
 		Context _context;
+		#endregion
 
+		#region constructor
 		public MovieCategoryAdapter(Activity activity, MovieExplorerViewModel viewModel)
 		{
 			_viewModel = viewModel;
 			_activity = activity;
 
-			//TODO: necesito un adapter para cada re-utilizacion del fragment????
 			_viewModel.Categories.CollectionChanged += (sender, args) =>
 			{
 				_activity.RunOnUiThread(NotifyDataSetChanged);
 			};
 		}
+		#endregion
 
+		#region override methods for MovieCategoryAdapter
 		// Create new views (invoked by the layout manager)
 		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
 		{
@@ -194,30 +213,44 @@ namespace MovieMeApp.Droid.Fragments
 		}
 
 		public override int ItemCount => _viewModel.Categories.Count;
+		#endregion
 	}
 
+	#endregion
 
 
+	#region HOLDERS
+
+	/// <summary>
+	/// Movie view holder.
+	/// </summary>
 	public class MovieViewHolder : RecyclerView.ViewHolder
 	{
+		#region public properties
 		public ImageView MovieCover { get; set; }
+		#endregion
 
+		#region constructor
 		public MovieViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
 							Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
 		{
-
 			MovieCover = itemView.FindViewById<ImageView>(Resource.Id.movie_cover);
 			MovieCover.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
 		}
+		#endregion
 	}
 
+	/// <summary>
+	/// Movie category view holder.
+	/// </summary>
 	public class MovieCategoryViewHolder : RecyclerView.ViewHolder
 	{
-		//public TextView TextView { get; set; }
+		#region public properties
 		public TextView CategoryTitle { get; set; }
 		public RecyclerView CategoryRecyclerView { get; set; }
+		#endregion
 
-
+		#region constructor
 		public MovieCategoryViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
 							Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
 		{
@@ -227,5 +260,8 @@ namespace MovieMeApp.Droid.Fragments
 			//this could be a shorcut to put this movie in to Favorites :)
 			//itemView.LongClick += (sender, e) => longClickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
 		}
+		#endregion
 	}
+
+	#endregion
 }

@@ -17,7 +17,6 @@ namespace MovieMeApp
 		{
 			ServiceLocator.Instance.Register<IDataStore<MovieStoreModel>, CloudDataMovieStore>();
 			ServiceLocator.Instance.Register<IAuthenticationStore, CloudAuthenticationStore>();
-			//ServiceLocator.Instance.Register<IDataStore<Item>, CloudDataStore>();
 
 #if __IOS__
 			ServiceLocator.Instance.Register<IMessageDialog, iOS.MessageDialog>();

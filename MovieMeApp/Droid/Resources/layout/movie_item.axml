@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/movie_category_item"
     android:layout_width="match_parent"
+    android:background="@color/window_background"
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/movie_cover"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/movie_cover_height"
-        android:background="@color/button_material_dark"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         android:clickable="true" />
 </LinearLayout>

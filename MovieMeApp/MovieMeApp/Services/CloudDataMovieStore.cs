@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+
 using MovieMeApp.Models;
 using MovieMeApp.Utils.Enums;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Plugin.Connectivity;
 
 namespace MovieMeApp.Services
 {
+	/// <summary>
+	/// Cloud data movie store.
+	/// </summary>
 	public class CloudDataMovieStore : IDataStore<MovieStoreModel>
 	{
+		#region private properties
 		HttpClient client;
 		List<MovieStoreModel> models;
 		CloudAuthenticationStore authenticationStore;
+		#endregion
 
+		#region constructor
 		public CloudDataMovieStore()
 		{
 			client = new HttpClient();
@@ -26,14 +29,19 @@ namespace MovieMeApp.Services
 
 			models = new List<MovieStoreModel>();
 		}
+		#endregion
 
+		#region interface methods implementations
+
+		/// <summary>
+		/// Gets the movie store async. It Consumes the API to get a list of movies according to the category passed by param.
+		/// </summary>
+		/// <returns>The movie store async.</returns>
+		/// <param name="filter">Filter.</param>
 		public async Task<IEnumerable<MovieStoreModel>> GetMovieStoreAsync(string filter)
 		{
-			//TODO: change appconfig string url's
 			var url = string.Format(AppConfig.DataStoreSearchURL, filter, AppConfig.DataStoreApiKey, SortType.Desc);
-
 			var json = await client.GetStringAsync(url);
-
 			var storeModel = await Task.Run(() => JsonConvert.DeserializeObject<MovieStoreModel>(json));
 
 			models.Add(storeModel);
@@ -41,6 +49,36 @@ namespace MovieMeApp.Services
 			//TODO: check if success to cancel pending request!
 			client.CancelPendingRequests();
 			return models;
+		}
+
+		/// <summary>
+		/// Gets the movie async.
+		/// </summary>
+		/// <returns>The movie async.</returns>
+		/// <param name="id">Identifier.</param>
+		public async Task<MovieStoreModel> GetMovieAsync(string id)
+		{
+			var url = string.Format(AppConfig.DataStoreSearchURL, id, AppConfig.DataStoreApiKey, SortType.Desc);
+			var json = await client.GetStringAsync(url);
+
+			var movie = await Task.Run(() => JsonConvert.DeserializeObject<MovieModel>(json));
+
+
+			return new MovieStoreModel { Results = new MovieModel[] { movie } };
+		}
+
+		/// <summary>
+		/// Gets the movie cover URL. This methods consumes the API to retrieve 
+		/// the movie cover url according to the movie ID
+		/// </summary>
+		/// <returns>The movie cover URL.</returns>
+		/// <param name="id">Identifier.</param>
+		public async Task<string> GetMovieCoverURL(string id)
+		{
+			var dataStore = await GetMovieAsync(id);
+			var image = string.Format(AppConfig.DataStoreMovieImageURL, "w500", dataStore.Results.First().BackdropPath);
+
+			return image;
 		}
 
 		public Task<bool> UpdateItemAsync(MovieStoreModel item)
@@ -63,27 +101,7 @@ namespace MovieMeApp.Services
 			throw new NotImplementedException();
 		}
 
-		public async Task<MovieStoreModel> GetMovieAsync(string id)
-		{
-			//https://api.themoviedb.org/3/movie/{0}?api_key={1}&{2}
-			var url = string.Format(AppConfig.DataStoreSearchURL, id, AppConfig.DataStoreApiKey, SortType.Desc);
-			var json = await client.GetStringAsync(url);
+		#endregion
 
-			var movie = await Task.Run(() => JsonConvert.DeserializeObject<MovieModel>(json));
-
-
-			return new MovieStoreModel { Results = new MovieModel[]{ movie } };
-		}
-
-		public async Task<string> GetMovieCoverURL(string id)
-		{
-			var dataStore = await GetMovieAsync(id);
-
-			//recuperar una movie por id, y sacar del result la url de la imagen-cover y armar el siguiente url
-			//https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg DataStoreMovieImageURL = "https://image.tmdb.org/t/p/{0}/{1}";
-			var image = string.Format(AppConfig.DataStoreMovieImageURL, "w500", dataStore.Results.First().BackdropPath);
-
-			return image; //TODO: return a bitmap
-		}
 	}
 }

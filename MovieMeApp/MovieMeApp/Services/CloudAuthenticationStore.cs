@@ -1,44 +1,43 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MovieMeApp.Services
 {
+	/// <summary>
+	/// Cloud authentication store.
+	/// </summary>
 	public class CloudAuthenticationStore : IAuthenticationStore
 	{
+		#region private properties
 		HttpClient client;
 		string requestToken;
 		string sessionID;
+		#endregion
 
+		#region constructor
 		public CloudAuthenticationStore()
 		{
 			client = new HttpClient();
 			client.BaseAddress = new Uri($"{AppConfig.DataStoreBaseURL}/");
 			requestToken = string.Empty;
 		}
+		#endregion
 
-		public string RequestToken 
-		{ 
-			get 
-			{ 
-				return requestToken; 
-			} 
-		}
-		public string SessionID
-		{
-			get
-			{
-				return sessionID;
-			}
-		}
+		#region private methods
 
 		private void Dispose()
 		{
 			client.Dispose();
 		}
 
+		/// <summary>
+		/// Gets the request token.
+		/// </summary>
+		/// <returns>The request token.</returns>
 		async Task<string> GetRequestToken()
 		{
 			//TODO: change appconfig string url's
@@ -56,12 +55,36 @@ namespace MovieMeApp.Services
 
 			return JObject.Parse(result.ToString())["request_token"].ToString();
 		}
+		#endregion
 
+		#region public methods
+		public string RequestToken
+		{
+			get
+			{
+				return requestToken;
+			}
+		}
+
+		public string SessionID
+		{
+			get
+			{
+				return sessionID;
+			}
+		}
+
+		/// <summary>
+		/// News the login. This method consume the API to validate the user according to the request 
+		/// already given by other method and according to user/passw given.
+		/// </summary>
+		/// <returns>The login.</returns>
+		/// <param name="username">Username.</param>
+		/// <param name="password">Password.</param>
 		public async Task<bool> NewLogin(string username, string password)
 		{
 			requestToken = await GetRequestToken();
 
-			//TODO: change appconfig string url's
 			var validationURL = string.Format(AppConfig.ValidateLoginURL, AppConfig.DataStoreApiKey, username, password, requestToken);
 			var jsonFromValidation = await client.GetStringAsync(validationURL);
 
@@ -81,6 +104,10 @@ namespace MovieMeApp.Services
 			return true;
 		}
 
+		/// <summary>
+		/// Creates the new session. This method consumes the API to create a new session 
+		/// </summary>
+		/// <returns>The new session.</returns>
 		public async Task<bool> CreateNewSession()
 		{
 			if (string.IsNullOrEmpty(requestToken))
@@ -108,5 +135,7 @@ namespace MovieMeApp.Services
 		{
 			throw new NotImplementedException();
 		}
+
+		#endregion
 	}
 }

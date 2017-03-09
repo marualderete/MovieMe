@@ -1,9 +1,8 @@
 ﻿using System;
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Widget;
+
 using MovieMeApp.Droid.Fragments;
 using MovieMeApp.ViewModels;
 
@@ -14,13 +13,22 @@ namespace MovieMeApp.Droid.Activities
 		ScreenOrientation = ScreenOrientation.Portrait)]
 	public class MovieExplorerActivity : BaseActivity
 	{
+		#region protected properties
 		/// <summary>
 		/// Specify the layout to inflace
 		/// </summary>
 		protected override int LayoutResource => Resource.Layout.activity_movie_explorer;
+		#endregion
 
+		#region private properties
 		MovieExplorerViewModel viewModel;
+		#endregion
 
+		#region override methods
+		/// <summary>
+		/// Ons the create.
+		/// </summary>
+		/// <param name="savedInstanceState">Saved instance state.</param>
 		protected override async void OnCreate(Bundle savedInstanceState)
 		{
 			//Layout gets inflated here
@@ -46,5 +54,7 @@ namespace MovieMeApp.Droid.Activities
 			SupportActionBar.SetHomeButtonEnabled(false);
 
 		}
+		#endregion
+
 	}
 }
