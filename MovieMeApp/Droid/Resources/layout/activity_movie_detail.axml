@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#00ffffff">
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:app="http://schemas.android.com/apk/res-auto"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:background="#00ffffff">
+
+		<ImageView
+	        android:id="@+id/movie_cover"
+	        android:layout_width="@dimen/movie_cover_detail_height"
+	        android:layout_height="@dimen/movie_cover_detail_width"
+	        android:layout_margin="5dp"
+	        android:background="@android:color/white"
+	        android:padding="1dp"
+	        android:clickable="false" />
+
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		    xmlns:app="http://schemas.android.com/apk/res-auto"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:background="#00ffffff">
+
+			<TextView
+		        android:id="@+id/movie_title"
+		        android:layout_width="match_parent"
+		        android:layout_height="30sp"
+		        android:padding="2sp"
+		        android:textStyle="bold"
+		        android:textColor="@color/primary_text"
+		        android:layout_alignParentStart="true"
+		        android:textSize="18sp" />
+
+			<TextView
+		        android:id="@+id/release_date"
+		        android:layout_width="match_parent"
+		        android:layout_height="30sp"
+		        android:padding="2sp"
+		        android:textColor="@color/primary_text"
+		        android:layout_alignParentStart="true"
+		        android:textSize="15sp" />
+			<!-- bajar estrellas y poner aca -->
+
+			<TextView
+		        android:id="@+id/votes_amount"
+		        android:layout_width="match_parent"
+		        android:layout_height="30sp"
+		        android:padding="2sp"
+		        android:textColor="@color/primary_text"
+		        android:layout_alignParentStart="true"
+		        android:textSize="12sp" />
+			
+		</LinearLayout>
+		
+	</LinearLayout>
+	
+    <TextView
+        android:id="@+id/movie_overview"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:padding="2sp"
+        android:textColor="@color/primary_text"
+        android:layout_alignParentStart="true"
+        android:textSize="18sp" />
+    
+
+	<!-- include movie_category -->
+	 <include
+        android:id="@+id/similar_movies"
+        layout="@layout/movie_category" />
+</LinearLayout>
