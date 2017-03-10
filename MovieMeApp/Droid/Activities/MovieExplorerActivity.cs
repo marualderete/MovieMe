@@ -2,8 +2,6 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Views;
-using Android.Widget;
 using MovieMeApp.Droid.Fragments;
 using MovieMeApp.ViewModels;
 
@@ -43,8 +41,15 @@ namespace MovieMeApp.Droid.Activities
 
 			// Create a new fragment and a transaction.
 			FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
-			MovieCategoryFragment aCategoryFragment = new MovieCategoryFragment();
-			aCategoryFragment.ViewModel = viewModel;
+			MovieCategoryAdapter adapter = new MovieCategoryAdapter(this, viewModel);
+
+			MovieCategoryFragment<MovieExplorerViewModel> aCategoryFragment = new MovieCategoryFragment<MovieExplorerViewModel>(viewModel, adapter, async () => 
+			{
+				viewModel.Categories.Clear();
+				await viewModel.LoadModels(AppConfig.TopRated);
+				await viewModel.LoadModels(AppConfig.Popular);
+				await viewModel.LoadModels(AppConfig.NowPlaying);
+			});
 
 			// The fragment will have the ID of Resource.Id.fragment_container.
 			fragmentTx.Add(Resource.Id.movie_explorer_container, aCategoryFragment);

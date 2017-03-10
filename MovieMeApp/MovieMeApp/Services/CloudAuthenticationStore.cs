@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using MovieMeApp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -75,6 +75,14 @@ namespace MovieMeApp.Services
 			}
 		}
 
+		public string AccountID
+		{
+			get
+			{
+				return accountID;
+			}
+		}
+
 		/// <summary>
 		/// News the login. This method consume the API to validate the user according to the request 
 		/// already given by other method and according to user/passw given.
@@ -128,6 +136,27 @@ namespace MovieMeApp.Services
 			}
 
 			sessionID = JObject.Parse(session.ToString())["session_id"].ToString();
+			client.CancelPendingRequests();
+			await GetAccount();
+
+			return true;
+		}
+
+		public async Task<bool> GetAccount()
+		{
+			var getAccountURL = string.Format(AppConfig.GetAccountURL, AppConfig.DataStoreApiKey, SessionID);
+			var json = await client.GetStringAsync(getAccountURL);
+
+			await Task.Run(() => JsonConvert.DeserializeObject(json));
+
+			var account = await Task.Run(() => JsonConvert.DeserializeObject<AccountModel>(json));
+
+			if (account == null)
+			{
+				return false;
+			}
+
+			accountID = account.Id;
 			return true;
 		}
 

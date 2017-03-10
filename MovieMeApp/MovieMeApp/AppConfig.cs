@@ -21,6 +21,10 @@ namespace MovieMeApp
 		public static readonly string ValidateLoginURL = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key={0}&username={1}&password={2}&request_token={3}";
 		public static readonly string GetSessionURL = "https://api.themoviedb.org/3/authentication/session/new?api_key={0}&request_token={1}";
 		public static readonly string PostFavoriteURL = "https://api.themoviedb.org/3/account/{0}/favorite?api_key={1}&session_id={2}";
+		public static readonly string GetAccountURL = "https://api.themoviedb.org/3/account?api_key={0}&session_id={1}";
+		public static readonly string GetSimilarMoviesURL = "https://api.themoviedb.org/3/movie/{0}/similar?api_key={1}&language=en-US";
+		//https://api.themoviedb.org/3/movie/1111/similar?api_key=asdf&language=en-US&page=1
+		//https://api.themoviedb.org/3/account?api_key=dfdfdfd&session_id=ddfdf
 		//https://api.themoviedb.org/3/account/9999/favorite?api_key=ab41356b33d100ec61e6c098ecc92140&session_id=9999
 
 

@@ -6,6 +6,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using MovieMeApp.Droid.Activities;
+using MovieMeApp.Droid.Fragments;
 using MovieMeApp.ViewModels;
 
 namespace MovieMeApp.Droid.Fragments
@@ -13,28 +14,33 @@ namespace MovieMeApp.Droid.Fragments
 	/// <summary>
 	/// Movie category fragment.
 	/// </summary>
-	public class MovieCategoryFragment : Android.App.Fragment, IFragmentVisible
+	public class MovieCategoryFragment<T> : Android.App.Fragment, IFragmentVisible where T: BaseViewModel
 	{
 		#region private properties
 
-		MovieCategoryAdapter adapter;
-		SwipeRefreshLayout refresher;
-		ProgressBar progress;
+		BaseRecycleViewAdapter _adapter;
+		T _viewModel;
+		SwipeRefreshLayout _refresher;
+		ProgressBar _progress;
+		Action _onRefresh;
 
 		#endregion
 
 		#region public properties
-		public static MovieCategoryFragment NewInstance() =>
-			new MovieCategoryFragment { Arguments = new Bundle() };
-
-		public MovieExplorerViewModel ViewModel
-		{
-			get;
-			set;
-		}
 
 		public void BecameVisible()
 		{
+		}
+
+		#endregion
+
+		#region constructor
+
+		public MovieCategoryFragment (T viewModel, BaseMovieCategoryAdapter<T> adapter, Action onRefresh = null)
+		{
+			_viewModel = viewModel;
+			_adapter = adapter;
+			_onRefresh = onRefresh;
 		}
 
 		#endregion
@@ -44,48 +50,57 @@ namespace MovieMeApp.Droid.Fragments
 		{
 			View view = inflater.Inflate(Resource.Layout.movie_category_list, container, false);
 
-			refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
-			refresher.SetColorSchemeColors(Resource.Color.accent);
-			refresher.Refreshing = true;
+			if (_onRefresh != null)
+			{
+				_refresher = view.FindViewById<SwipeRefreshLayout>(Resource.Id.refresher);
+				_refresher.SetColorSchemeColors(Resource.Color.accent);
+			}
 
-			progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_frame_container);
-			progress.Visibility = ViewStates.Visible;
+			Refreshing(true);
+
+			//TODO: see if I need this in detail page
+			_progress = view.FindViewById<ProgressBar>(Resource.Id.progressbar_frame_container);
+			_progress.Visibility = ViewStates.Visible;
 
 			var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
 			recyclerView.HasFixedSize = true;
-			recyclerView.SetAdapter(adapter = new MovieCategoryAdapter(Activity, ViewModel));
+			recyclerView.SetAdapter(_adapter);
 
-			progress.Visibility = ViewStates.Gone;
-			refresher.Refreshing = false;
+			_progress.Visibility = ViewStates.Gone;
+
+			Refreshing(false);
 			return view;
 		}
 
 		public override void OnStart()
 		{
 			base.OnStart();
-
-			refresher.Refresh += Refresher_Refresh;
-			//adapter.ItemClick += Adapter_ItemClick;
+			if (_onRefresh != null)
+			{
+				_refresher.Refresh += Refresher_Refresh;
+			}
 		}
 
 		public override void OnStop()
 		{
 			base.OnStop();
-			refresher.Refresh -= Refresher_Refresh;
-			//adapter.ItemClick -= Adapter_ItemClick;
+			if (_onRefresh != null)
+			{
+				_refresher.Refresh -= Refresher_Refresh;
+			}
 		}
 
 		#endregion
 
 		#region private methods
-		//void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
-		//{
-		//	var item = ViewModel.Categories[e.Position];
-		//	var intent = new Intent(Activity, typeof(BrowseItemDetailActivity));
 
-		//	intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
-		//	Activity.StartActivity(intent);
-		//}
+		void Refreshing(bool refreshing)
+		{
+			if (_onRefresh != null)
+			{
+				_refresher.Refreshing = refreshing;
+			}
+		}
 
 		void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
@@ -93,14 +108,12 @@ namespace MovieMeApp.Droid.Fragments
 
 		async void Refresher_Refresh(object sender, EventArgs e)
 		{
-			refresher.Refreshing = true;
-
-			ViewModel.Categories.Clear();
-			await ViewModel.LoadModels(AppConfig.TopRated);
-			await ViewModel.LoadModels(AppConfig.Popular);
-			await ViewModel.LoadModels(AppConfig.NowPlaying);
-
-			refresher.Refreshing = false;
+			if (_onRefresh != null)
+			{
+				_refresher.Refreshing = true;
+				_onRefresh();
+				_refresher.Refreshing = false;
+			}
 		}
 
 		#endregion

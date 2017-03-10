@@ -13,5 +13,6 @@ namespace MovieMeApp.Services
 		Task<string> GetMovieCoverURL(string id);
 
 		Task<bool> FavoriteMovie(string id);
+		Task<T> GetSimilarMovies(string id);
 	}
 }

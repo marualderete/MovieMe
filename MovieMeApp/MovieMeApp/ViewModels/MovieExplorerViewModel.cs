@@ -17,6 +17,9 @@ namespace MovieMeApp.ViewModels
 		public ObservableCollection<CategoryModel> Categories { get; set; }
 		public Command LoadModelsCommand { get; set; }
 
+		public CategoryModel SimilarMovies { get; set; }
+		public MovieModel Movie { get; set; }
+
 		#endregion
 
 		#region constructor

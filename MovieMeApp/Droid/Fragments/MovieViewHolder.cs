@@ -68,6 +68,7 @@ namespace MovieMeApp.Droid.Fragments
 	class MovieAdapter : BaseRecycleViewAdapter
 	{
 		#region private properties
+
 		Context _context;
 		ObservableCollection<MovieModel> _movies;
 		CloudDataMovieStore _dataMovieStore;
@@ -138,33 +139,31 @@ namespace MovieMeApp.Droid.Fragments
 	/// <summary>
 	/// Movie category adapter.
 	/// </summary>
-	class MovieCategoryAdapter : BaseRecycleViewAdapter
+
+	public abstract class BaseMovieCategoryAdapter<T> : BaseRecycleViewAdapter where T : BaseViewModel
 	{
 		#region private properties
 
-		MovieExplorerViewModel _viewModel;
-        StringUtils _utils;
-		Activity _activity;
-		Context _context;
+		protected T ViewModel;
+		protected Activity Activity;
 
+		Context _context;
+		StringUtils _utils;
 		#endregion
 
 		#region constructor
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MovieMeApp.Droid.Fragments.MovieCategoryAdapter"/> class.
         /// </summary>
         /// <param name="activity">Activity.</param>
         /// <param name="viewModel">View model.</param>
-		public MovieCategoryAdapter(Activity activity, MovieExplorerViewModel viewModel)
+		public BaseMovieCategoryAdapter(Activity activity, T viewModel)
 		{
-			_viewModel = viewModel;
+			ViewModel = viewModel;
             _utils = new StringUtils ();
-			_activity = activity;
+			Activity = activity;
 
-			_viewModel.Categories.CollectionChanged += (sender, args) =>
-			{
-				_activity.RunOnUiThread(NotifyDataSetChanged);
-			};
 		}
 		#endregion
 
@@ -182,26 +181,95 @@ namespace MovieMeApp.Droid.Fragments
 			return vh;
 		}
 
+        #endregion
+
+		#region public methods
+
+		public string GetCategoryName(string id)
+		{
+			return _utils.GetCategoryName(id);
+		}
+
+		#endregion
+
+	}
+
+	public class MovieDetailAdapter : BaseMovieCategoryAdapter<MovieDetailViewModel>
+	{
+		#region constructor
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:MovieMeApp.Droid.Fragments.MovieCategoryAdapter"/> class.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
+		/// <param name="viewModel">View model.</param>
+		public MovieDetailAdapter(Activity activity, MovieDetailViewModel viewModel) : base(activity, viewModel)
+		{
+			
+		}
+		#endregion
+
+		#region override methods for MovieCategoryAdapter
+
 		// Replace the contents of a view (invoked by the layout manager)
 		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
 		{
-			var item = _viewModel.Categories[position];
+			var item = ViewModel.SimilarMovies;
 
 			// Replace the contents of the view with that element
 			var movieCategoryHolder = holder as MovieCategoryViewHolder;
 
-            movieCategoryHolder.CategoryTitle.Text = _utils.GetCategoryName (item.CategoryName);
-
+			movieCategoryHolder.CategoryTitle.Text = GetCategoryName(item.CategoryName);
 			movieCategoryHolder.CategoryRecyclerView.HasFixedSize = true;
 
-            var movieAdapter = new MovieAdapter (item.Movies, (CloudDataMovieStore)_viewModel.DataStore);
-            movieCategoryHolder.CategoryRecyclerView.SetAdapter(movieAdapter);
+			var movieAdapter = new MovieAdapter(item.Movies, (CloudDataMovieStore)ViewModel.DataStore);
+			movieCategoryHolder.CategoryRecyclerView.SetAdapter(movieAdapter);
 
 		}
 
-		public override int ItemCount => _viewModel.Categories.Count;
+		public override int ItemCount => ViewModel.SimilarMovies.Movies.Count;
 
-        #endregion
+		#endregion
+
+	}
+
+	public class MovieCategoryAdapter : BaseMovieCategoryAdapter<MovieExplorerViewModel>
+	{
+		#region constructor
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:MovieMeApp.Droid.Fragments.MovieCategoryAdapter"/> class.
+		/// </summary>
+		/// <param name="activity">Activity.</param>
+		/// <param name="viewModel">View model.</param>
+		public MovieCategoryAdapter(Activity activity, MovieExplorerViewModel viewModel) : base(activity,viewModel)
+		{
+			ViewModel.Categories.CollectionChanged += (sender, args) =>
+			{
+				activity.RunOnUiThread(NotifyDataSetChanged);
+			};
+		}
+		#endregion
+
+		#region override methods for MovieCategoryAdapter
+
+		// Replace the contents of a view (invoked by the layout manager)
+		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+		{
+			var item = ViewModel.Categories[position];
+
+			// Replace the contents of the view with that element
+			var movieCategoryHolder = holder as MovieCategoryViewHolder;
+
+	        movieCategoryHolder.CategoryTitle.Text = GetCategoryName(item.CategoryName);
+			movieCategoryHolder.CategoryRecyclerView.HasFixedSize = true;
+
+          	var movieAdapter = new MovieAdapter (item.Movies, (CloudDataMovieStore)ViewModel.DataStore);
+          	movieCategoryHolder.CategoryRecyclerView.SetAdapter(movieAdapter);
+
+		}
+
+		public override int ItemCount => ViewModel.Categories.Count;
+
+		#endregion
 
 	}
 

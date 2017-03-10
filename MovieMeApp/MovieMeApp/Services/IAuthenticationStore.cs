@@ -10,5 +10,7 @@ namespace MovieMeApp.Services
 		Task<bool> CreateNewSession();
 
 		Task<bool> IsValidSession();
+
+		Task<bool> GetAccount();
 	}
 }

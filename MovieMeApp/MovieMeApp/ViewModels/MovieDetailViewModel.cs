@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,31 @@ namespace MovieMeApp.ViewModels
 			{
 				Debug.WriteLine(ex);
 				return string.Empty;
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+		public async Task GetSimilarMovies(string movieId)
+		{
+			IsBusy = true;
+
+			try
+			{
+				var dataStores = await DataStore.GetSimilarMovies(movieId);
+				var movies = dataStores.Results.ToList();
+
+				SimilarMovies = new CategoryModel
+				{
+					CategoryName = "Similar Movies",
+					Movies = new ObservableCollection<MovieModel>(movies)
+				};
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
 			}
 			finally
 			{

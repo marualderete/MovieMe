@@ -83,5 +83,10 @@ namespace MovieMeApp.Services
 		{
 			throw new NotImplementedException();
 		}
+
+		public Task<Item> GetSimilarMovies(string id)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

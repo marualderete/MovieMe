@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -42,6 +43,7 @@ namespace MovieMeApp.Services
 		/// <param name="filter">Filter.</param>
 		public async Task<MovieStoreModel> GetMovieStoreAsync(string filter)
 		{
+			//client = new HttpClient();
 			var url = string.Format(AppConfig.DataStoreSearchURL, filter, AppConfig.DataStoreApiKey, SortType.Desc);
 
             try {
@@ -56,16 +58,18 @@ namespace MovieMeApp.Services
 				{
 					models.Add(filter, storeModel);
 				}
+				return models[filter];
 
             } catch (Exception ex) {
                 Console.WriteLine ("Was an error trying to get movies from API: ", ex.Message);
+				return null;
             } finally 
             {
                 //TODO: check if success to cancel pending request!
                 client.CancelPendingRequests ();
             }
 			
-			return models[filter];
+
 		}
 
 		/// <summary>
@@ -116,28 +120,43 @@ namespace MovieMeApp.Services
 
 		public async Task<bool> FavoriteMovie(string id)
 		{
-			////https://api.themoviedb.org/3/account/9999/favorite?api_key=ab41356b33d100ec61e6c098ecc92140&session_id=9999
-			var url = string.Format(AppConfig.PostFavoriteURL, authenticationStore.SessionID, AppConfig.DataStoreApiKey, authenticationStore.SessionID);
+			////https://api.themoviedb.org/3/account/{0}/favorite?api_key={1}&session_id={2}
+			var url = string.Format(AppConfig.PostFavoriteURL, authenticationStore.AccountID, AppConfig.DataStoreApiKey, authenticationStore.SessionID);
+			using (var content =
+					new MultipartFormDataContent())
+			{
+				using (var message = await client.PostAsync(url, content))
+				{
+					var input = await message.Content.ReadAsStringAsync();
 
-			return false;
-			//var dataStore = await GetMovieAsync(id);
-			//var currentMovie = dataStore.Results.Any() ? dataStore.Results.First() : null;
+					return true;
+				}
+			}
+		}
 
-			//if (currentMovie == null)
-			//{
-			//	Console.WriteLine("There is no movie for your id");
-			//	return string.Empty;
-			//}
+		public async Task<MovieStoreModel> GetSimilarMovies(string id)
+		{ 
+			var url = string.Format(AppConfig.GetSimilarMoviesURL, id, AppConfig.DataStoreApiKey);
+			try
+			{
+				var json = await client.GetStringAsync(url);
+				var storeModel = await Task.Run(() => JsonConvert.DeserializeObject<MovieStoreModel>(json));
 
-			//var image = string.Format(AppConfig.DataStoreMovieImageURL, "w500", currentMovie.BackdropPath);
-			//return image;
+				return storeModel;
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Was an error trying to get selected movie from API: ", ex.Message);
+
+				return new MovieStoreModel();
+			}
 		}
 
 		public Task<IEnumerable<MovieStoreModel>> GetItemsAsync(bool forceRefresh = false)
 		{
 			throw new NotImplementedException();
 		}
-
 
 
 		#endregion
