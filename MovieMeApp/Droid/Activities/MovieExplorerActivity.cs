@@ -39,7 +39,7 @@ namespace MovieMeApp.Droid.Activities
 
 			await viewModel.LoadModels(AppConfig.TopRated);
 			await viewModel.LoadModels(AppConfig.Popular);
-            await viewModel.LoadModels (AppConfig.Similar);
+            await viewModel.LoadModels (AppConfig.NowPlaying);
 
 			// Create a new fragment and a transaction.
 			FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();

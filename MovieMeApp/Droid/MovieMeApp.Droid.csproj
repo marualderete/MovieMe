@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MovieMeApp.Droid</RootNamespace>
     <AssemblyName>MovieMeApp.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -123,12 +123,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
-    <Compile Include="Activities\AddItemActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
-    <Compile Include="Activities\BrowseItemDetailActivity.cs" />
+    <Compile Include="Activities\MovieDetailActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Fragments\AboutFragment.cs" />
     <Compile Include="Fragments\MovieViewHolder.cs" />
     <Compile Include="Fragments\IFragmentVisible.cs" />
     <Compile Include="Helpers\BaseRecycleViewAdapter.cs" />
@@ -139,6 +137,7 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Activities\MovieExplorerActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Fragments\MovieCategoryFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />
@@ -162,16 +161,12 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_save.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\profile_generic.png" />
     <AndroidResource Include="Resources\layout\activity_add_item.axml" />
-    <AndroidResource Include="Resources\layout\activity_item_details.axml" />
     <AndroidResource Include="Resources\layout\activity_login.axml" />
     <AndroidResource Include="Resources\layout\activity_main.axml" />
-    <AndroidResource Include="Resources\layout\activity_myitem_details.axml" />
-    <AndroidResource Include="Resources\layout\fragment_about.axml" />
+    <AndroidResource Include="Resources\layout\activity_movie_detail.axml" />
     <AndroidResource Include="Resources\layout\movie_category_list.axml" />
     <AndroidResource Include="Resources\layout\movie_item.axml" />
     <AndroidResource Include="Resources\layout\movie_category.axml" />
-    <AndroidResource Include="Resources\layout\movie_detail.axml" />
-    <AndroidResource Include="Resources\layout\tabs.axml" />
     <AndroidResource Include="Resources\layout\toolbar.axml" />
     <AndroidResource Include="Resources\menu\top_menus.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
@@ -179,7 +174,6 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\values\arrays.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\dimens.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />

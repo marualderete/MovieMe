@@ -16,6 +16,7 @@ namespace MovieMeApp.Services
 		HttpClient client;
 		string requestToken;
 		string sessionID;
+		string accountID;
 		#endregion
 
 		#region constructor

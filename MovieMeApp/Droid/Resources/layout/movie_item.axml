@@ -3,6 +3,7 @@
     android:id="@+id/movie_category_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+	
     <ImageView
         android:id="@+id/movie_cover"
         android:layout_width="@dimen/movie_cover_width"
@@ -11,4 +12,5 @@
         android:background="@android:color/white"
         android:padding="1dp"
         android:clickable="true" />
+	
 </LinearLayout>

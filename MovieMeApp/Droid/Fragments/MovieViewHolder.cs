@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Android.Support.V4.Widget;
 using Android.App;
 using Android.Content;
 
@@ -19,101 +17,49 @@ using Square.Picasso;
 
 namespace MovieMeApp.Droid.Fragments
 {
+	#region HOLDERS
+
 	/// <summary>
-	/// Movie category fragment.
+	/// Movie view holder.
 	/// </summary>
-	public class MovieCategoryFragment : Android.App.Fragment, IFragmentVisible
+	public class MovieViewHolder : RecyclerView.ViewHolder
 	{
-		#region private properties
-
-		MovieCategoryAdapter adapter;
-		SwipeRefreshLayout refresher;
-		ProgressBar progress;
-
-		#endregion
-
 		#region public properties
-		public static MovieCategoryFragment NewInstance() =>
-			new MovieCategoryFragment { Arguments = new Bundle() };
-
-		public MovieExplorerViewModel ViewModel
-		{
-			get;
-			set;
-		}
-
-		public void BecameVisible()
-		{
-		}
-
+		public ImageView MovieCover { get; set; }
 		#endregion
 
-		#region override methods for MovieCategoryFragment
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		#region constructor
+		public MovieViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
+							Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
 		{
-            View view = inflater.Inflate (Resource.Layout.movie_category_list, container, false);
-
-            refresher = view.FindViewById<SwipeRefreshLayout> (Resource.Id.refresher);
-            refresher.SetColorSchemeColors (Resource.Color.accent);
-            refresher.Refreshing = true;
-
-            progress = view.FindViewById<ProgressBar> (Resource.Id.progressbar_frame_container);
-            progress.Visibility = ViewStates.Visible;
-
-			var recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
-			recyclerView.HasFixedSize = true;
-			recyclerView.SetAdapter(adapter = new MovieCategoryAdapter(Activity, ViewModel));
-
-            progress.Visibility = ViewStates.Gone;
-            refresher.Refreshing = false;
-			return view;
+			MovieCover = itemView.FindViewById<ImageView>(Resource.Id.movie_cover);
+			MovieCover.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
 		}
-
-		public override void OnStart()
-		{
-			base.OnStart();
-
-			refresher.Refresh += Refresher_Refresh;
-			adapter.ItemClick += Adapter_ItemClick;
-		}
-
-		public override void OnStop()
-		{
-			base.OnStop();
-			refresher.Refresh -= Refresher_Refresh;
-			adapter.ItemClick -= Adapter_ItemClick;
-		}
-
-		#endregion
-
-		#region private methods
-		void Adapter_ItemClick(object sender, RecyclerClickEventArgs e)
-		{
-			var item = ViewModel.Categories[e.Position];
-			var intent = new Intent(Activity, typeof(BrowseItemDetailActivity));
-
-			intent.PutExtra("data", Newtonsoft.Json.JsonConvert.SerializeObject(item));
-			Activity.StartActivity(intent);
-		}
-
-		void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-		}
-
-		async void Refresher_Refresh(object sender, EventArgs e)
-		{
-            refresher.Refreshing = true;
-
-			ViewModel.Categories.Clear();
-			await ViewModel.LoadModels(AppConfig.TopRated);
-			await ViewModel.LoadModels(AppConfig.Popular);
-            await ViewModel.LoadModels (AppConfig.Similar);
-
-            refresher.Refreshing = false;
-		}
-
 		#endregion
 	}
+
+	/// <summary>
+	/// Movie category view holder.
+	/// </summary>
+	public class MovieCategoryViewHolder : RecyclerView.ViewHolder
+	{
+		#region public properties
+		public TextView CategoryTitle { get; set; }
+		public RecyclerView CategoryRecyclerView { get; set; }
+		#endregion
+
+		#region constructor
+		public MovieCategoryViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
+							Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
+		{
+			CategoryTitle = itemView.FindViewById<TextView>(Resource.Id.movie_title);
+			CategoryRecyclerView = itemView.FindViewById<RecyclerView>(Resource.Id.category_recycler_view);
+
+		}
+		#endregion
+	}
+
+	#endregion
 
 	#region ADAPTERS
 	/// <summary>
@@ -172,14 +118,19 @@ namespace MovieMeApp.Droid.Fragments
 
 		public override int ItemCount => _movies.Count;
 
+		#endregion
+
+		#region public methods
+
         void Image_ItemClick (RecyclerClickEventArgs e)
         {
             var item = _movies [e.Position];
 
-            var intent = new Intent (_context.ApplicationContext, typeof (BrowseItemDetailActivity));
+			var intent = new Intent (_context.ApplicationContext, typeof (MovieDetailActivity));
 
-            //intent.PutExtra ("data", Newtonsoft.Json.JsonConvert.SerializeObject (item));
-            //Activity.StartActivity (intent);
+            intent.PutExtra ("movie", Newtonsoft.Json.JsonConvert.SerializeObject (item));
+			intent.AddFlags(ActivityFlags.NewTask);
+			_context.ApplicationContext.StartActivity (intent);
         }
 		#endregion
 	}
@@ -257,47 +208,5 @@ namespace MovieMeApp.Droid.Fragments
 	#endregion
 
 
-	#region HOLDERS
 
-	/// <summary>
-	/// Movie view holder.
-	/// </summary>
-	public class MovieViewHolder : RecyclerView.ViewHolder
-	{
-		#region public properties
-		public ImageView MovieCover { get; set; }
-		#endregion
-
-		#region constructor
-		public MovieViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
-							Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
-		{
-			MovieCover = itemView.FindViewById<ImageView>(Resource.Id.movie_cover);
-			MovieCover.Click += (sender, e) => clickListener(new RecyclerClickEventArgs { View = itemView, Position = AdapterPosition });
-		}
-		#endregion
-	}
-
-	/// <summary>
-	/// Movie category view holder.
-	/// </summary>
-	public class MovieCategoryViewHolder : RecyclerView.ViewHolder
-	{
-		#region public properties
-		public TextView CategoryTitle { get; set; }
-		public RecyclerView CategoryRecyclerView { get; set; }
-		#endregion
-
-		#region constructor
-		public MovieCategoryViewHolder(View itemView, Action<RecyclerClickEventArgs> clickListener,
-							Action<RecyclerClickEventArgs> longClickListener) : base(itemView)
-		{
-			CategoryTitle = itemView.FindViewById<TextView>(Resource.Id.movie_title);
-			CategoryRecyclerView = itemView.FindViewById<RecyclerView>(Resource.Id.category_recycler_view);
-
-		}
-		#endregion
-	}
-
-	#endregion
 }

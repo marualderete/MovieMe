@@ -44,7 +44,7 @@ namespace MovieMeApp.ViewModels
 			try
 			{
 				var dataStores = await DataStore.GetMovieStoreAsync(category);
-				var movies = dataStores.ToList().First().Results.ToList();
+				var movies = dataStores.Results.ToList();
 
 				CategoryModel aCategory = new CategoryModel
 				{

@@ -22,6 +22,8 @@ namespace MovieMeApp.Utils
                         return "Popular";
                 case "similar": 
                         return "Similar";
+				case "now_playing":
+						return "Now Playing";
                 default:
                     return string.Empty;
             }

@@ -73,5 +73,15 @@ namespace MovieMeApp.Services
 		{
 			throw new NotImplementedException();
 		}
+
+		Task<Item> IDataStore<Item>.GetMovieStoreAsync(string filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<bool> FavoriteMovie(string id)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
