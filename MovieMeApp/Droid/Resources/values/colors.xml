@@ -3,7 +3,7 @@
 	<color name="primary">#673AB7</color>
 	<color name="primaryDark">#512DA8</color>
 	<color name="accent">#96d1ff</color>
-	<color name="window_background">#4527A0</color>
+	<color name="window_background">#424242</color>
 
 	<!-- MOVIE COLORS -->
 	<color name="primary_text">#f1f8f9</color>
