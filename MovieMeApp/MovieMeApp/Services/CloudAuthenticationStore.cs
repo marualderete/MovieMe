@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using MovieMeApp.Helpers;
 using MovieMeApp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -157,6 +158,7 @@ namespace MovieMeApp.Services
 			}
 
 			accountID = account.Id;
+			//TODO: Use Settings class here to auth and need to add bd access to remember login!
 			return true;
 		}
 

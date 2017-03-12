@@ -18,6 +18,8 @@ namespace MovieMeApp.Helpers
 			}
 		}
 
+		//IMPORTANT TODO: I must use this static class to authenticate user!
+
 		#region Setting Constants
 		const string UserIdKey = "userid";
 		static readonly string UserIdDefault = string.Empty;
