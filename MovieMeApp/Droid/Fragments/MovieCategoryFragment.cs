@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using MovieMeApp.Droid.Activities;
 using MovieMeApp.Droid.Fragments;
+using MovieMeApp.Droid.Fragments.Adapters;
 using MovieMeApp.ViewModels;
 
 namespace MovieMeApp.Droid.Fragments

@@ -35,7 +35,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\CategoryModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\StringUtils.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AccountModel.cs" />
   </ItemGroup>
   <ItemGroup>

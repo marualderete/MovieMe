@@ -6,77 +6,34 @@ using MovieMeApp.Models;
 
 namespace MovieMeApp.Services
 {
-	public class MockDataStore : IDataStore<Item>
+	/// <summary>
+	/// Mock data store. This is a mock class, to make tests at future when this project has a unit test project!
+	/// </summary>
+	public class MockDataStore : IDataStore<MovieStoreModel>
 	{
 		bool isInitialized;
-		List<Item> items;
+		List<MovieStoreModel> items;
 
 		public MockDataStore()
 		{
-			items = new List<Item>();
-			var _items = new List<Item>
+			items = new List<MovieStoreModel>();
+
+			var _items = new List<MovieStoreModel>
 			{
-				new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is a nice description"},
-				new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is a nice description"},
-				new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is a nice description"},
-				new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is a nice description"},
-				new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is a nice description"},
-				new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is a nice description"},
+				new MovieStoreModel 
+				{ 
+					Id = Guid.NewGuid().ToString(), 
+					Page = 1, 
+					TotalResults= 30, 
+					Results = new MovieModel[]{new MovieModel()}
+				},
+
 			};
 
-			foreach (Item item in _items)
+			foreach (MovieStoreModel item in _items)
 			{
 				items.Add(item);
 			}
-		}
-
-		public async Task<bool> AddItemAsync(Item item)
-		{
-			items.Add(item);
-
-			return await Task.FromResult(true);
-		}
-
-		public async Task<bool> UpdateItemAsync(Item item)
-		{
-			var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-			items.Remove(_item);
-			items.Add(item);
-
-			return await Task.FromResult(true);
-		}
-
-		public async Task<bool> DeleteItemAsync(string id)
-		{
-			var _item = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-			items.Remove(_item);
-
-			return await Task.FromResult(true);
-		}
-
-		public async Task<Item> GetMovieAsync(string id)
-		{
-			return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
-		}
-
-		public async Task<IEnumerable<Item>> GetMovieStoreAsync(string filter)
-		{
-			return await Task.FromResult(items);
-		}
-
-		public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
-		{
-			return await Task.FromResult(items);
-		}
-
-		public Task<string> GetMovieCoverURL(string id)
-		{
-			throw new NotImplementedException();
-		}
-
-		Task<Item> IDataStore<Item>.GetMovieStoreAsync(string filter)
-		{
-			throw new NotImplementedException();
 		}
 
 		public Task<bool> FavoriteMovie(string id)
@@ -84,7 +41,27 @@ namespace MovieMeApp.Services
 			throw new NotImplementedException();
 		}
 
-		public Task<Item> GetSimilarMovies(string id)
+		public Task<IEnumerable<MovieStoreModel>> GetItemsAsync(bool forceRefresh = false)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<MovieStoreModel> GetMovieAsync(string id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<string> GetMovieCoverURL(string id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<MovieStoreModel> GetMovieStoreAsync(string filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<MovieStoreModel> GetSimilarMovies(string id)
 		{
 			throw new NotImplementedException();
 		}

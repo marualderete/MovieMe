@@ -11,6 +11,7 @@ using Square.Picasso;
 using Uri = Android.Net.Uri;
 using Android.Support.V7.Widget;
 using MovieMeApp.Droid.Fragments;
+using MovieMeApp.Droid.Fragments.Adapters;
 
 namespace MovieMeApp.Droid.Activities
 {

@@ -70,7 +70,7 @@ namespace MovieMeApp.ViewModels
 
 				SimilarMovies = new CategoryModel
 				{
-					CategoryName = "Similar Movies",
+					CategoryName = AppConfig.Similar,
 					Movies = new ObservableCollection<MovieModel>(movies)
 				};
 			}

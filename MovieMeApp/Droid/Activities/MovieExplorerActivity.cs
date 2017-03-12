@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MovieMeApp.Droid.Fragments;
+using MovieMeApp.Droid.Fragments.Adapters;
 using MovieMeApp.ViewModels;
 
 namespace MovieMeApp.Droid.Activities

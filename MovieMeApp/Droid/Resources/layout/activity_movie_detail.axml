@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:orientation="vertical"
-		android:padding="12dp"
+        android:padding="12dp"
         android:background="#00ffffff">
         <LinearLayout
             android:id="@+id/detail_descriptions"
@@ -37,7 +37,7 @@
                 <TextView
                     android:id="@+id/movie_title"
                     android:layout_width="match_parent"
-                    android:layout_height="30sp"
+                    android:layout_height="wrap_content"
                     android:padding="2sp"
                     android:textStyle="bold"
                     android:textColor="@color/primary_text"
@@ -46,7 +46,7 @@
                 <TextView
                     android:id="@+id/release_date"
                     android:layout_width="match_parent"
-                    android:layout_height="30sp"
+                    android:layout_height="wrap_content"
                     android:padding="2sp"
                     android:textColor="@color/primary_text"
                     android:layout_alignParentStart="true"
@@ -68,30 +68,25 @@
             android:id="@+id/movie_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="2sp"
             android:background="#00ffffff"
             android:layout_below="@id/detail_descriptions"
             android:textColor="@color/primary_text"
-			android:paddingTop="10dp"
+			android:paddingLeft="2dp"
+			android:paddingRight="2dp"
             android:layout_alignParentStart="true"
             android:textSize="12sp" />
-
-		<!-- include movie_category -->
-		<LinearLayout
-			android:layout_width="match_parent"
-	        android:layout_height="150dp"
-	        android:layout_below="@id/detail_container"
-	        android:orientation="vertical"
-			android:paddingLeft="12dp"
-			android:paddingRight="12dp"
-			android:paddingTop="35dp">
-			    <include
-			        android:id="@+id/similar_movies"
-			        layout="@layout/movie_category"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"/>
-		</LinearLayout>
-			
+    <!-- include movie_category -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_below="@id/detail_container"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <include
+                android:id="@+id/similar_movies"
+                layout="@layout/movie_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
-
 </RelativeLayout>

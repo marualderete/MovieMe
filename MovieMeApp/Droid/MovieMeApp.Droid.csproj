@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MovieMeApp.Droid</RootNamespace>
     <AssemblyName>MovieMeApp.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -127,7 +127,6 @@
     <Compile Include="Activities\MovieDetailActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
-    <Compile Include="Fragments\MovieViewHolder.cs" />
     <Compile Include="Fragments\IFragmentVisible.cs" />
     <Compile Include="Helpers\BaseRecycleViewAdapter.cs" />
     <Compile Include="Helpers\MessageDialog.cs" />
@@ -138,6 +137,12 @@
     <Compile Include="Activities\MovieExplorerActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Fragments\MovieCategoryFragment.cs" />
+    <Compile Include="Fragments\Holders\MovieCategoryViewHolder.cs" />
+    <Compile Include="Fragments\Holders\MovieViewHolder.cs" />
+    <Compile Include="Fragments\Adapters\MovieAdapter.cs" />
+    <Compile Include="Fragments\Adapters\BaseMovieCategoryAdapter.cs" />
+    <Compile Include="Fragments\Adapters\MovieDetailAdapter.cs" />
+    <Compile Include="Fragments\Adapters\MovieCategoryAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />
@@ -182,6 +187,10 @@
     <AndroidResource Include="Resources\values-v21\styles.xml" />
     <AndroidResource Include="Resources\layout\activity_movie_explorer.axml" />
   </ItemGroup> 
+  <ItemGroup>
+    <Folder Include="Fragments\Holders\" />
+    <Folder Include="Fragments\Adapters\" />
+  </ItemGroup>
   <Import Project="..\MovieMeApp\MovieMeApp.projitems" Label="Shared" Condition="Exists('..\MovieMeApp\MovieMeApp.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
