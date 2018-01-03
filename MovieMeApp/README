@@ -1,14 +1,13 @@
 MOVIE ME
 
-This is a project test for Cie Digital Labs.
-According to the requirements sended by mail, and considering the short time to make this app, 
+This is a project I did for a company test. I did it in a week aprox.
+According to the requirements sended by this company, and considering the short time to make this app, 
 I want to make some observations about this code:
 
-1- I have some problems with my pc configurations, so I lost some coding hours u.u
 2- I don't reach to finish the following things:
   1.1 - load next pages when you finish to slide the first page in the movie lists. I did the refresh page but not the load pages. You only will see one page.
   1.2 - I don't reach to finish sign up
-  1.3 - styles are embebbed. I have no time to put them in Styles file
+  1.3 - styles are embebbed. I have no time to put them in Styles file, will do
   1.4 - I use an existence key
   1.5 - I create a user to make the login.
   1.6 - Some UI stuff such as Favorite Button (the services exists but dont reach to call it)
@@ -27,4 +26,5 @@ Credits
 Maria Ines Alderete - 2017 - 
 @marualderete
 
-v0.1
+v0.01
+
